@@ -24,6 +24,6 @@ describe('Root', () => {
 		const rootNode = ReactDOM.findDOMNode(root);
 
 		expect(rootNode).toExist();
-		expect(rootNode.firstChild.textContent).toBe('root-element');
+		expect(rootNode.firstChild.textContent).toBe('some page content');
 	});
 });
