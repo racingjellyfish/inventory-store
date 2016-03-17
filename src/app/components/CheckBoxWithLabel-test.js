@@ -1,6 +1,6 @@
 'use strict';
 
-import CheckboxWithLabel from '../../app/components/CheckboxWithLabel';
+import CheckboxWithLabel from './CheckboxWithLabel';
 import expect from 'expect';
 import React from 'react';
 import ReactDOM from 'react-dom';

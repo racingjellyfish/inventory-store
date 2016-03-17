@@ -6,7 +6,7 @@
 import expect from 'expect';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from '../../app/components/Root';
+import Root from './Root';
 import TestUtils from 'react-addons-test-utils';
 
 describe('Root', () => {

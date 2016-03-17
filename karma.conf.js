@@ -21,7 +21,9 @@ module.exports = function (config) {
 				'sourcemap'
 			]
 		},
-		reporters: [ 'dots' ],
+		reporters: [
+			'dots'
+		],
 		webpack: {
 			devtool: 'inline-source-map',
 			module: webpackConfigCommon.module
