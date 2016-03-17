@@ -4,7 +4,9 @@
 	"description": "A toy app to demonstrate various current web tools including webpack, react and babel.",
 	"main": "src/app/App.js",
 	"scripts": {
-		"e2e-test": "run-e2e-tests.sh",
+		"e2e-test": "nightwatch",
+		"e2e-test:chrome": "npm run e2e-test -- --env chrome",
+		"e2e-test:firefox": "npm run e2e-test -- --env firefox",
 		"lint": "eslint src",
 		"test": "karma start"
 	},
