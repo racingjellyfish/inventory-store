@@ -1,23 +1,22 @@
-import { combineReducers } from 'redux';
 import * as ActionTypes from '../constants/ActionTypes';
+import { combineReducers } from 'redux-immutable';
+import Immutable from 'immutable';
 
 const initialState = {
-	bottles: []
+	bottles: {}
 };
 
-function bottles(state = initialState.bottles, action) {
+function bottles(state = Immutable.Map(initialState.bottles), action) {
 	switch (action.type) {
 		case ActionTypes.ADD_BOTTLE:
-			return [
-					...state,
-					{
+			const newBottle = Immutable.fromJS({
 						id: action.payload.bottleId
-					}
-				];
+					});
+			return state.set(String(action.payload.bottleId), newBottle);
+
 		case ActionTypes.REMOVE_BOTTLE:
-			return state.filter((bottle) => {
-					return bottle.id !== action.payload.bottleId;
-				});
+			return state.delete(String(action.payload.bottleId));
+
 		default:
 			return state;
 	}

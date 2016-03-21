@@ -1,37 +1,53 @@
 import * as Bottle from '../actions/Bottle';
 import expect from 'expect';
+import Immutable from 'immutable';
 import Inventory from './Inventory';
 
 describe('Reducer -', () => {
+	const initialState = Immutable.fromJS({
+		bottles: {}
+	});
 
 	describe('Inventory -', () => {
 
 		it('should return the initial state', () => {
-			expect(Inventory(undefined, {})).toEqual({
-				bottles: []
-			});
+			expect(Immutable.is(Inventory(undefined, {}), initialState)).toBe(true);
 		});
 
 		it('should add a bottle', () => {
-			expect(Inventory(undefined, Bottle.addBottle(0))).toEqual({
-				bottles: [{
-					id: 0
-				}]
+			const updatedState = Inventory(initialState, Bottle.addBottle(0));
+			const expectedState = Immutable.fromJS({
+				bottles: {
+					0: {
+						id: 0
+					}
+				}
 			});
+
+			expect(Immutable.is(updatedState, expectedState)).toBe(true);
 		});
 
 		it('should remove a bottle', () => {
-			expect(Inventory({
-			bottles: [{
-				id: 0
-			},
-			{
-				id: 1
-			}]}, Bottle.removeBottle(0))).toEqual({
-				bottles: [{
-					id: 1
-				}]
+			const state = Immutable.fromJS({
+				bottles: {
+					0: {
+						id: 0
+					},
+					1: {
+						id: 1
+					}
+				}
 			});
+			const updatedState = Inventory(state, Bottle.removeBottle(0));
+			const expectedState = Immutable.fromJS({
+				bottles: {
+					1: {
+						id: 1
+					}
+				}
+			});
+
+			expect(Immutable.is(updatedState, expectedState)).toBe(true);
 		});
 	});
 });
