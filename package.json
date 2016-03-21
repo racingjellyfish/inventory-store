@@ -1,7 +1,7 @@
 {
-	"name": "react-webpack-karma",
+	"name": "inventory-system",
 	"version": "1.0.0",
-	"description": "A toy app to demonstrate various current web tools including webpack, react and babel.",
+	"description": "A semi-serious app using some current web tools including webpack, react and babel. Builds on react-webpack-karma toy project.",
 	"main": "src/app/App.js",
 	"scripts": {
 		"build": "webpack",
