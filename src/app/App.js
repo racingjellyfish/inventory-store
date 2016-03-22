@@ -44,8 +44,9 @@ store.dispatch(Bottle.removeBottle(2));
 
 store.dispatch(Batch.addBatch(0, 'beer0'));
 store.dispatch(Batch.addBatch(1, 'beer1'));
-store.dispatch(Bottle.fillBottle(0, 0));
-store.dispatch(Bottle.fillBottle(3, 1));
+store.dispatch(Bottle.fill(0, 0));
+store.dispatch(Bottle.fill(3, 1));
+store.dispatch(Bottle.drink(3));
 
 // Stop listening to state updates
 unsubscribe();

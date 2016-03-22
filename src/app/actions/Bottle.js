@@ -21,12 +21,21 @@ export function removeBottle(bottleId) {
 	};
 };
 
-export function fillBottle(bottleId, batchId) {
+export function fill(bottleId, batchId) {
 	return {
 		type: ActionTypes.FILL_BOTTLE,
 		payload: {
 			bottleId: bottleId,
 			batchId: batchId
+		}
+	};
+};
+
+export function drink(bottleId) {
+	return {
+		type: ActionTypes.DRINK_BOTTLE,
+		payload: {
+			bottleId: bottleId
 		}
 	};
 };

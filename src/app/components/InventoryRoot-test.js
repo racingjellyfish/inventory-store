@@ -30,6 +30,6 @@ describe('InventoryRoot', () => {
 		const rootNode = ReactDOM.findDOMNode(inventoryRoot);
 
 		expect(rootNode).toExist();
-		expect(rootNode.firstChild.textContent).toBe('TODO: add UI');
+		expect(rootNode.firstChild.textContent).toBe('Bottles');
 	});
 });

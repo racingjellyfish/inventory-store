@@ -35,6 +35,24 @@ describe('Reducer -', () => {
 
 				checkEquality(updatedState, expectedState);
 			});
+
+			it('should fill a bottle', () => {
+				const state = State([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
+				const expectedState = State([Batch(0, 'batch-0')], [Bottle(0, 0), Bottle(1)]);
+
+				const updatedState = Inventory(state, BottleActions.fill(0, 0));
+
+				checkEquality(updatedState, expectedState);
+			});
+
+			it('should empty a bottle', () => {
+				const state = State([Batch(0, 'batch-0')], [Bottle(0, 0), Bottle(1)]);
+				const expectedState = State([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
+
+				const updatedState = Inventory(state, BottleActions.drink(0));
+
+				checkEquality(updatedState, expectedState);
+			});
 		});
 	});
 });

@@ -30,6 +30,10 @@ function bottles(state = Immutable.Map(initialState.bottles), action) {
 			return state.set(String(action.payload.bottleId),
 				Bottle(action.payload.bottleId, action.payload.batchId));
 
+		case ActionTypes.DRINK_BOTTLE:
+			return state.set(String(action.payload.bottleId),
+				Bottle(action.payload.bottleId));
+
 		default:
 			return state;
 	}
