@@ -1,12 +1,12 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import {Batch, Bottle} from '../entities/Entities';
+import { Batch, Bottle } from '../entities/Entities';
 import { combineReducers } from 'redux-immutable';
 import Immutable from 'immutable';
 import { State } from '../entities/State';
 
 const initialState = State();
 
-function batches(state = Immutable.Map(initialState.batches), action) {
+function batches(state = initialState.get('batches'), action) {
 	switch (action.type) {
 		case ActionTypes.ADD_BATCH:
 			return state.set(String(action.payload.batchId),
@@ -17,14 +17,16 @@ function batches(state = Immutable.Map(initialState.batches), action) {
 	}
 };
 
-function bottles(state = Immutable.Map(initialState.bottles), action) {
+function bottles(state = initialState.get('bottles'), action) {
 	switch (action.type) {
 		case ActionTypes.ADD_BOTTLE:
 			return state.set(String(action.payload.bottleId),
 				Bottle(action.payload.bottleId));
 
 		case ActionTypes.REMOVE_BOTTLE:
-			return state.delete(String(action.payload.bottleId));
+			return state.filter((bottle) => {
+				return bottle.get('id') !== action.payload.bottleId;
+			});
 
 		case ActionTypes.FILL_BOTTLE:
 			return state.set(String(action.payload.bottleId),

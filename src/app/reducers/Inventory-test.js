@@ -13,7 +13,7 @@ describe('Reducer -', () => {
 		describe('generic -', () => {
 
 			it('should return the initial state', () => {
-				expect(Immutable.is(Inventory(undefined, {}), initialState)).toBe(true);
+				checkEquality(Inventory(undefined, {}), initialState);
 			});
 		});
 

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-import './ux/Root.less';
+import './ux/InventoryRoot.less';
 
 import BottleList from '../containers/BottleList';
 import React from 'react';
@@ -11,7 +11,7 @@ import React from 'react';
 export default class InventoryRoot extends React.Component {
 	render() {
 		return (
-			<div>
+			<div className='inventoryRoot'>
 				<BottleList />
 			</div>
 		);
