@@ -5,14 +5,14 @@
 
 import './ux/InventoryRoot.less';
 
-import BottleList from '../containers/BottleList';
 import React from 'react';
+import VisibleBottleList from '../containers/VisibleBottleList';
 
 export default class InventoryRoot extends React.Component {
 	render() {
 		return (
 			<div className='inventoryRoot'>
-				<BottleList />
+				<VisibleBottleList />
 			</div>
 		);
 	};
