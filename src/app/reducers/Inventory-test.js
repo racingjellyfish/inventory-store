@@ -26,7 +26,7 @@ describe('Reducer -', () => {
 				}
 			});
 
-			expect(Immutable.is(updatedState, expectedState)).toBe(true);
+			checkEquality(updatedState, expectedState);
 		});
 
 		it('should remove a bottle', () => {
@@ -51,7 +51,13 @@ describe('Reducer -', () => {
 				}
 			});
 
-			expect(Immutable.is(updatedState, expectedState)).toBe(true);
+			checkEquality(updatedState, expectedState);
 		});
 	});
 });
+
+function checkEquality(actual, expected) {
+	if (!Immutable.is(actual, expected)) {
+		throw new Error('Expected: ' + JSON.stringify(actual) + ' to be ' + JSON.stringify(expected));
+	}
+};
