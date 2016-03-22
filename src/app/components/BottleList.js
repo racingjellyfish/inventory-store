@@ -5,6 +5,7 @@
 
 import './ux/BottleList.less';
 
+import Bottle from './Bottle';
 import { PropTypes } from 'react';
 import React from 'react';
 
@@ -16,7 +17,7 @@ export default class BottleList extends React.Component {
 				<div className='bottleListHeader'>Bottles</div>
 				<ul className='bottleList'>
 					{bottles.map(bottle =>
-						<li onClick={() => this.props.onBottleClick(bottle.get('id'))} key={bottle.get('id')}>{bottle.get('batchId')}</li>
+						<Bottle bottle={bottle} onClick={this.props.onBottleClick} />
 					)}
 				</ul>
 			</div>
