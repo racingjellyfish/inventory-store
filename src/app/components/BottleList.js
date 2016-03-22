@@ -16,7 +16,7 @@ export default class BottleList extends React.Component {
 			<div>
 				<div className='bottleListHeader'>Bottles</div>
 				<ul className='bottleList'>
-					{bottles.map(bottle =>
+					{bottles.map((bottle) =>
 						<Bottle bottle={bottle} onClick={this.props.onBottleClick} />
 					)}
 				</ul>

@@ -7,11 +7,11 @@ const getVisibleBottles = (bottles, filter) => {
 		case 'SHOW_ALL':
 			return bottles;
 		case 'SHOW_FULL':
-			return bottles.filter(bottle => bottle.batchId !== undefined);
+			return bottles.filter((bottle) => bottle.batchId !== undefined);
 		case 'SHOW_EMPTY':
-			return bottles.filter(bottle => bottle.batchId === undefined);
+			return bottles.filter((bottle) => bottle.batchId === undefined);
 	}
-}
+};
 
 const mapStateToProps = (state) => {
 	return {
@@ -22,9 +22,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onBottleClick: (id) => {
-			dispatch(BottleActions.drink(id))
+			dispatch(BottleActions.drink(id));
 		}
-	}
+	};
 };
 
 const VisibleBottleList = connect(
