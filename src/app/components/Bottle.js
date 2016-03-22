@@ -7,6 +7,7 @@ import './ux/Bottle.less';
 
 import { PropTypes } from 'react';
 import React from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 
 export default class Bottle extends React.Component {
 	render() {
@@ -18,6 +19,10 @@ export default class Bottle extends React.Component {
 				batch: {bottle.batchId === undefined ? 'empty' : bottle.batchId}
 			</li>
 		);
+	};
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return shallowCompare(this, nextProps, nextState);
 	};
 }
 
