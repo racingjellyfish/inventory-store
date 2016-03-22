@@ -5,6 +5,7 @@ import Inventory from './Inventory';
 
 describe('Reducer -', () => {
 	const initialState = Immutable.fromJS({
+		batches: {},
 		bottles: {}
 	});
 
@@ -17,6 +18,7 @@ describe('Reducer -', () => {
 		it('should add a bottle', () => {
 			const updatedState = Inventory(initialState, Bottle.addBottle(0));
 			const expectedState = Immutable.fromJS({
+				batches: {},
 				bottles: {
 					0: {
 						id: 0
@@ -29,6 +31,7 @@ describe('Reducer -', () => {
 
 		it('should remove a bottle', () => {
 			const state = Immutable.fromJS({
+				batches: {},
 				bottles: {
 					0: {
 						id: 0
@@ -40,6 +43,7 @@ describe('Reducer -', () => {
 			});
 			const updatedState = Inventory(state, Bottle.removeBottle(0));
 			const expectedState = Immutable.fromJS({
+				batches: {},
 				bottles: {
 					1: {
 						id: 1

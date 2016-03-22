@@ -20,3 +20,13 @@ export function removeBottle(bottleId) {
 		}
 	};
 };
+
+export function fillBottle(bottleId, batchId) {
+	return {
+		type: ActionTypes.FILL_BOTTLE,
+		payload: {
+			bottleId: bottleId,
+			batchId: batchId
+		}
+	};
+};
