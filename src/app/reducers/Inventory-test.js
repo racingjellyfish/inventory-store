@@ -1,63 +1,46 @@
-import * as Bottle from '../actions/Bottle';
+import { Batch, Bottle } from '../entities/Entities';
+import * as BottleActions from '../actions/Bottle';
 import expect from 'expect';
 import Immutable from 'immutable';
 import Inventory from './Inventory';
+import { State } from '../entities/State';
 
 describe('Reducer -', () => {
-	const initialState = Immutable.fromJS({
-		batches: {},
-		bottles: {}
-	});
+	const initialState = State();
 
 	describe('Inventory -', () => {
 
-		it('should return the initial state', () => {
-			expect(Immutable.is(Inventory(undefined, {}), initialState)).toBe(true);
+		describe('generic -', () => {
+
+			it('should return the initial state', () => {
+				expect(Immutable.is(Inventory(undefined, {}), initialState)).toBe(true);
+			});
 		});
 
-		it('should add a bottle', () => {
-			const updatedState = Inventory(initialState, Bottle.addBottle(0));
-			const expectedState = Immutable.fromJS({
-				batches: {},
-				bottles: {
-					0: {
-						id: 0
-					}
-				}
+		describe('bottles -', () => {
+
+			it('should add a bottle', () => {
+				const expectedState = State([], [Bottle(0)]);
+
+				const updatedState = Inventory(initialState, BottleActions.addBottle(0));
+
+				checkEquality(updatedState, expectedState);
 			});
 
-			checkEquality(updatedState, expectedState);
-		});
+			it('should remove a bottle', () => {
+				const state = State([], [Bottle(0), Bottle(1)]);
+				const expectedState = State([], [Bottle(1)]);
 
-		it('should remove a bottle', () => {
-			const state = Immutable.fromJS({
-				batches: {},
-				bottles: {
-					0: {
-						id: 0
-					},
-					1: {
-						id: 1
-					}
-				}
-			});
-			const updatedState = Inventory(state, Bottle.removeBottle(0));
-			const expectedState = Immutable.fromJS({
-				batches: {},
-				bottles: {
-					1: {
-						id: 1
-					}
-				}
-			});
+				const updatedState = Inventory(state, BottleActions.removeBottle(0));
 
-			checkEquality(updatedState, expectedState);
+				checkEquality(updatedState, expectedState);
+			});
 		});
 	});
 });
 
 function checkEquality(actual, expected) {
 	if (!Immutable.is(actual, expected)) {
-		throw new Error('Expected: ' + JSON.stringify(actual) + ' to be ' + JSON.stringify(expected));
+		throw new Error('Expected:\t' + actual + '\n\tto be:\t\t' + expected);
 	}
 };
