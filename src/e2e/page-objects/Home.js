@@ -3,6 +3,9 @@ module.exports = {
 	elements: {
 		appElement: {
 			selector: '#app'
+		},
+		bottleElement: {
+			selector: 'li.bottle:first-child'
 		}
 	}
 };
