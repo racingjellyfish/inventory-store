@@ -8,9 +8,9 @@ function convertToMap(arrayOfImmutable) {
 	return mapOfImmutable;
 };
 
-export function State(batches, bottles) {
+export function State(batches = [], bottles = []) {
 	return Map({
-		batches: convertToMap(batches || []),
-		bottles: convertToMap(bottles || [])
+		batches: convertToMap(batches),
+		bottles: convertToMap(bottles)
 	});
 };

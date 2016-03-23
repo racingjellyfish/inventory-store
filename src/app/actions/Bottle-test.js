@@ -1,10 +1,10 @@
 /**
- * basic UTs for the root component
+ * basic UTs for bottle related actions
  */
 'use strict';
 
 import * as ActionTypes from '../constants/ActionTypes';
-import * as Bottle from '../actions/Bottle';
+import * as Bottle from './Bottle';
 import expect from 'expect';
 
 describe('ActionCreator -', () => {
