@@ -20,11 +20,30 @@ describe('ActionCreator -', () => {
 			});
 		});
 
-		it('calling removeBottle returns an action to remove a bottle', () => {
-			expect(Bottle.removeBottle(1)).toEqual({
-				type: ActionTypes.REMOVE_BOTTLE,
+		it('calling drink returns an action to drink a bottle', () => {
+			expect(Bottle.drink(1)).toEqual({
+				type: ActionTypes.DRINK_BOTTLE,
 				payload: {
 					bottleId: 1
+				}
+			});
+		});
+
+		it('calling fill returns an action to fill a bottle', () => {
+			expect(Bottle.fill(2, 0)).toEqual({
+				type: ActionTypes.FILL_BOTTLE,
+				payload: {
+					bottleId: 2,
+					batchId: 0
+				}
+			});
+		});
+
+		it('calling removeBottle returns an action to remove a bottle', () => {
+			expect(Bottle.removeBottle(3)).toEqual({
+				type: ActionTypes.REMOVE_BOTTLE,
+				payload: {
+					bottleId: 3
 				}
 			});
 		});
