@@ -11,12 +11,11 @@ import shallowCompare from 'react-addons-shallow-compare';
 
 export default class Bottle extends React.Component {
 	render() {
-		const bottle = this.props.bottle.toObject();
+		const { bottle, contents, onClick } = this.props;
 		return (
 			<li className='bottle'
-					key={bottle.id}
-					onClick={() => this.props.onClick(bottle.id)}>
-				batch: {bottle.batchId === undefined ? 'empty' : bottle.batchId}
+					onClick={() => onClick(bottle.get('id'))}>
+				batch: {contents}
 			</li>
 		);
 	};

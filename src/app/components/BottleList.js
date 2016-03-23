@@ -5,7 +5,7 @@
 
 import './ux/BottleList.less';
 
-import Bottle from './Bottle';
+import LabelledBottle from '../containers/LabelledBottle';
 import { PropTypes } from 'react';
 import React from 'react';
 
@@ -17,7 +17,10 @@ export default class BottleList extends React.Component {
 				<div className='bottleListHeader'>Bottles</div>
 				<ul className='bottleList'>
 					{bottles.map((bottle) =>
-						<Bottle bottle={bottle} onClick={this.props.onBottleClick} />
+						<LabelledBottle
+							key={bottle.get('id')}
+							bottle={bottle}
+							onClick={this.props.onBottleClick} />
 					)}
 				</ul>
 			</div>
