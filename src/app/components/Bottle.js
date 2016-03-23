@@ -11,10 +11,10 @@ import shallowCompare from 'react-addons-shallow-compare';
 
 export default class Bottle extends React.Component {
 	render() {
-		const { bottle, contents, onClick } = this.props;
+		const { id, contents, onClick } = this.props;
 		return (
 			<li className='bottle'
-					onClick={() => onClick(bottle.get('id'))}>
+					onClick={() => onClick(id)}>
 				batch: {contents}
 			</li>
 		);
@@ -26,6 +26,7 @@ export default class Bottle extends React.Component {
 }
 
 Bottle.propTypes = {
-	bottle: PropTypes.object.isRequired,
+	id: PropTypes.number.isRequired,
+	contents: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired
 };

@@ -11,7 +11,7 @@ const getContents = (batches, bottle) => {
 const mapStateToProps = (state, ownProps) => {
 	const bottle = ownProps.bottle;
 	return {
-		bottle: bottle,
+		id: bottle.get('id'),
 		contents: getContents(state.get('batches'), bottle)
 	};
 };
