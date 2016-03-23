@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const getContents = (batches, bottle) => {
 	const batchId = bottle.get('batchId');
-	const batch = batches.get(String(batchId));
+	const batch = batches.get(batchId);
 	return batch === undefined ? 'empty' : batch.get('name');
 };
 

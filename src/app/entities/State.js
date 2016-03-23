@@ -1,15 +1,15 @@
-import { fromJS } from 'immutable';
+import { Map } from 'immutable';
 
 function convertToMap(arrayOfImmutable) {
-	const mapOfImmutable = {};
+	let mapOfImmutable = Map();
 	arrayOfImmutable.forEach((immutableObject) => {
-		mapOfImmutable[immutableObject.get('id')] = immutableObject;
+		mapOfImmutable = mapOfImmutable.set(immutableObject.get('id'), immutableObject);
 	});
-	return fromJS(mapOfImmutable);
+	return mapOfImmutable;
 };
 
 export function State(batches, bottles) {
-	return fromJS({
+	return Map({
 		batches: convertToMap(batches || []),
 		bottles: convertToMap(bottles || [])
 	});

@@ -9,7 +9,7 @@ const initialState = State();
 function batches(state = initialState.get('batches'), action) {
 	switch (action.type) {
 		case ActionTypes.ADD_BATCH:
-			return state.set(String(action.payload.batchId),
+			return state.set(action.payload.batchId,
 				Batch(action.payload.batchId, action.payload.batchName));
 
 		default:
@@ -20,7 +20,7 @@ function batches(state = initialState.get('batches'), action) {
 function bottles(state = initialState.get('bottles'), action) {
 	switch (action.type) {
 		case ActionTypes.ADD_BOTTLE:
-			return state.set(String(action.payload.bottleId),
+			return state.set(action.payload.bottleId,
 				Bottle(action.payload.bottleId));
 
 		case ActionTypes.REMOVE_BOTTLE:
@@ -29,12 +29,12 @@ function bottles(state = initialState.get('bottles'), action) {
 			});
 
 		case ActionTypes.FILL_BOTTLE:
-			return state.set(String(action.payload.bottleId),
-				Bottle(action.payload.bottleId, action.payload.batchId));
+			return state.setIn([action.payload.bottleId, 'batchId'],
+				action.payload.batchId);
 
 		case ActionTypes.DRINK_BOTTLE:
-			return state.set(String(action.payload.bottleId),
-				Bottle(action.payload.bottleId));
+			return state.setIn([action.payload.bottleId, 'batchId'],
+				undefined);
 
 		default:
 			return state;

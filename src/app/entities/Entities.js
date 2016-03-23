@@ -1,14 +1,14 @@
-import { fromJS } from 'immutable';
+import { Map } from 'immutable';
 
 export function Batch(id, name) {
-	return fromJS({
+	return Map({
 		id: id,
 		name: name
 	});
 };
 
 export function Bottle(id, batchId) {
-	return fromJS({
+	return Map({
 		id: id,
 		batchId: batchId
 	});
