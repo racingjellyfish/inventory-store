@@ -1,7 +1,7 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import { Batch, Bottle } from '../entities/Entities';
+import { Batch, Bottle, BottleFromJson } from '../entities/Entities';
 import { combineReducers } from 'redux-immutable';
-import Immutable from 'immutable';
+import { Map } from 'immutable';
 import { State } from '../entities/State';
 
 const initialState = State();
@@ -11,6 +11,14 @@ function batches(state = initialState.get('batches'), action) {
 		case ActionTypes.ADD_BATCH:
 			return state.set(action.payload.batchId,
 				Batch(action.payload.batchId, action.payload.batchName));
+
+		case ActionTypes.RECEIVE_DATA:
+			const updates = JSON.parse(action.payload.json);
+			return state.withMutations(map => {
+				updates.batches.forEach((batch) => {
+					map.set(batch.id, Map(batch));
+				})
+			});
 
 		default:
 			return state;
@@ -36,6 +44,27 @@ function bottles(state = initialState.get('bottles'), action) {
 			return state.setIn([action.payload.bottleId, 'batchId'],
 				undefined);
 
+		case ActionTypes.RECEIVE_DATA:
+			const updates = JSON.parse(action.payload.json);
+			return state.withMutations(map => {
+				updates.bottles.forEach((bottle) => {
+					map.set(bottle.id, BottleFromJson(bottle));
+				})
+			});
+
+		default:
+			return state;
+	}
+};
+
+function data(state = initialState.get('data'), action) {
+	switch (action.type) {
+		case ActionTypes.REQUEST_DATA:
+			return state.set('isFetching', true);
+
+		case ActionTypes.RECEIVE_DATA:
+			return state.set('isFetching', false);
+
 		default:
 			return state;
 	}
@@ -43,7 +72,8 @@ function bottles(state = initialState.get('bottles'), action) {
 
 const Inventory = combineReducers({
 	batches,
-	bottles
+	bottles,
+	data
 });
 
 export default Inventory;

@@ -10,3 +10,9 @@ export const DRINK_BOTTLE = 'DRINK_BOTTLE';
  * batch related actions
  */
 export const ADD_BATCH = 'ADD_BATCH';
+
+/**
+ * server related actions
+ */
+export const RECEIVE_DATA = 'RECEIVE_DATA';
+export const REQUEST_DATA = 'REQUEST_DATA';

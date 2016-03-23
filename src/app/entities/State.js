@@ -8,8 +8,9 @@ function convertToMap(arrayOfImmutable) {
 	return mapOfImmutable;
 };
 
-export function State(batches = [], bottles = []) {
+export function State(batches = [], bottles = [], isFetching = false) {
 	return Map({
+		data: Map({isFetching: isFetching}),
 		batches: convertToMap(batches),
 		bottles: convertToMap(bottles)
 	});

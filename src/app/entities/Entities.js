@@ -13,3 +13,10 @@ export function Bottle(id, batchId) {
 		batchId: batchId
 	});
 };
+
+export function BottleFromJson(jsonData) {
+	return Map({
+		id: jsonData.id,
+		batchId: jsonData.batchId
+	});
+};

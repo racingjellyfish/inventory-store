@@ -3,6 +3,7 @@ import * as BottleActions from '../actions/Bottle';
 import expect from 'expect';
 import Immutable from 'immutable';
 import Inventory from './Inventory';
+import * as ServerActions from '../actions/Server';
 import { State } from '../entities/State';
 
 describe('Reducer -', () => {
@@ -53,6 +54,36 @@ describe('Reducer -', () => {
 
 				checkEquality(updatedState, expectedState);
 			});
+		});
+
+		describe('server -', () => {
+
+			it('should merge data', () => {
+				const state = State();
+				const expectedState = State([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
+				const jsonData = JSON.stringify({
+					batches: [
+						{id: 0, name: 'batch-0'}
+					],
+					bottles: [
+						{id: 0},
+						{id: 1}
+					]
+				});
+
+				const updatedState = Inventory(state, ServerActions.receiveData(jsonData));
+
+				checkEquality(updatedState, expectedState);
+			});
+		});
+
+		it('requesting data should set isFetching flag to true', () => {
+			const state = State();
+			const expectedState = State([], [], true);
+
+			const updatedState = Inventory(state, ServerActions.requestData());
+
+			checkEquality(updatedState, expectedState);
 		});
 	});
 });
