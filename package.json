@@ -6,6 +6,7 @@
 	"repository": "https://github.com/racingjellyfish/inventory-store.git",
 	"scripts": {
 		"build": "webpack",
+		"pree2e-test": "npm run build",
 		"e2e-test": "npm run e2e-test:chrome && npm run e2e-test:firefox && npm run e2e-test:ie",
 		"e2e-test:chrome": "nightwatch --env chrome",
 		"e2e-test:firefox": "nightwatch --env firefox",
