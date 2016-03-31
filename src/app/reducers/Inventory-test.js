@@ -11,6 +11,41 @@ describe('Reducer -', () => {
 
 	describe('Inventory -', () => {
 
+		describe('performance -', () => {
+
+			it('map-style access', () => {
+				let testMap = Immutable.Map({});
+				let count = 0;
+				const start = Date.now();
+				while (count++ < 1000000) {
+					testMap = testMap.set(count, {id: count, value: 'a string'});
+				}
+				console.log('built map: ' + (Date.now() - start));
+				console.log('map entry: ' + testMap.get(777777));
+				console.log('got entry: ' + (Date.now() - start));
+				console.log('size:   ' + testMap.size);
+				testMap = testMap.delete(777777);
+				console.log('size:   ' + testMap.size);
+				console.log('deleted:   ' + (Date.now() - start));
+			});
+
+			it('list-style access', () => {
+				let testList = Immutable.List([]);
+				let count = 0;
+				const start = Date.now();
+				while (count++ < 1000000) {
+					testList = testList.push({id: count, value: 'a string'});
+				}
+				console.log('built list: ' + (Date.now() - start));
+				console.log('list entry: ' + testList.filter((item) => item.id == 777777));
+				console.log('got entry: ' + (Date.now() - start));
+				console.log('size:   ' + testList.size);
+				testList = testList.filter((item) => item.id != 777777);
+				console.log('size:   ' + testList.size);
+				console.log('deleted:   ' + (Date.now() - start));
+			});
+		});
+
 		describe('generic -', () => {
 
 			it('should return the initial state', () => {
