@@ -7,16 +7,14 @@ export function Batch(id, name) {
 	});
 };
 
-export function Bottle(id, batchId) {
+export function Bottle(id) {
 	return Map({
-		id: id,
-		batchId: batchId
+		id: id
 	});
 };
 
 export function BottleFromJson(jsonData) {
 	return Map({
-		id: jsonData.id,
-		batchId: jsonData.batchId
+		id: jsonData.id
 	});
 };

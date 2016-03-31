@@ -38,7 +38,7 @@ describe('Reducer -', () => {
 
 			it('should fill a bottle', () => {
 				const state = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
-				const expectedState = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0, 0), Bottle(1)]);
+				const expectedState = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)], [[0, 0]]);
 
 				const updatedState = Inventory(state, BottleActions.fill(0, 0));
 
@@ -46,7 +46,7 @@ describe('Reducer -', () => {
 			});
 
 			it('should empty a bottle', () => {
-				const state = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0, 0), Bottle(1)]);
+				const state = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)], [[0, 0]]);
 				const expectedState = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
 
 				const updatedState = Inventory(state, BottleActions.drink(0));
@@ -78,7 +78,7 @@ describe('Reducer -', () => {
 
 		it('requesting data should set isFetching flag to true', () => {
 			const state = new InventoryState();
-			const expectedState = InventoryState.create([], [], { isFetching: true });
+			const expectedState = InventoryState.create([], [], [], { isFetching: true });
 
 			const updatedState = Inventory(state, ServerActions.requestData());
 

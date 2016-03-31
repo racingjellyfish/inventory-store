@@ -28,21 +28,12 @@ function batches(state = initialState.get('batches'), action) {
 function bottles(state = initialState.get('bottles'), action) {
 	switch (action.type) {
 		case ActionTypes.ADD_BOTTLE:
-			return state.set(action.payload.bottleId,
-				Bottle(action.payload.bottleId));
+			return state.push(Bottle(action.payload.bottleId));
 
 		case ActionTypes.REMOVE_BOTTLE:
 			return state.filter((bottle) => {
 				return bottle.get('id') !== action.payload.bottleId;
 			});
-
-		case ActionTypes.FILL_BOTTLE:
-			return state.setIn([action.payload.bottleId, 'batchId'],
-				action.payload.batchId);
-
-		case ActionTypes.DRINK_BOTTLE:
-			return state.setIn([action.payload.bottleId, 'batchId'],
-				undefined);
 
 		case ActionTypes.RECEIVE_DATA:
 			const updates = JSON.parse(action.payload.json);
@@ -51,6 +42,19 @@ function bottles(state = initialState.get('bottles'), action) {
 					map.set(bottle.id, BottleFromJson(bottle));
 				})
 			});
+
+		default:
+			return state;
+	}
+};
+
+function bottleToBatchLookup(state = initialState.get('bottleToBatchLookup'), action) {
+	switch (action.type) {
+		case ActionTypes.DRINK_BOTTLE:
+			return state.delete(action.payload.bottleId);
+
+		case ActionTypes.FILL_BOTTLE:
+			return state.set(action.payload.bottleId, action.payload.batchId);
 
 		default:
 			return state;
@@ -73,6 +77,7 @@ function serverState(state = initialState.get('serverState'), action) {
 const Inventory = combineReducers({
 	batches,
 	bottles,
+	bottleToBatchLookup,
 	serverState
 });
 
