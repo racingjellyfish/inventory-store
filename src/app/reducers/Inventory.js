@@ -2,9 +2,9 @@ import * as ActionTypes from '../constants/ActionTypes';
 import { Batch, Bottle, BottleFromJson } from '../entities/Entities';
 import { combineReducers } from 'redux-immutable';
 import { Map } from 'immutable';
-import { State } from '../entities/State';
+import { InventoryState } from '../entities/InventoryState';
 
-const initialState = State();
+const initialState = new InventoryState();
 
 function batches(state = initialState.get('batches'), action) {
 	switch (action.type) {
@@ -57,7 +57,7 @@ function bottles(state = initialState.get('bottles'), action) {
 	}
 };
 
-function data(state = initialState.get('data'), action) {
+function serverState(state = initialState.get('serverState'), action) {
 	switch (action.type) {
 		case ActionTypes.REQUEST_DATA:
 			return state.set('isFetching', true);
@@ -73,7 +73,7 @@ function data(state = initialState.get('data'), action) {
 const Inventory = combineReducers({
 	batches,
 	bottles,
-	data
+	serverState
 });
 
 export default Inventory;

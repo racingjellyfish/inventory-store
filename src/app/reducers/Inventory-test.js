@@ -4,10 +4,10 @@ import expect from 'expect';
 import Immutable from 'immutable';
 import Inventory from './Inventory';
 import * as ServerActions from '../actions/Server';
-import { State } from '../entities/State';
+import { InventoryState } from '../entities/InventoryState';
 
 describe('Reducer -', () => {
-	const initialState = State();
+	const initialState = new InventoryState();
 
 	describe('Inventory -', () => {
 
@@ -21,7 +21,7 @@ describe('Reducer -', () => {
 		describe('bottles -', () => {
 
 			it('should add a bottle', () => {
-				const expectedState = State([], [Bottle(0)]);
+				const expectedState = InventoryState.create([], [Bottle(0)]);
 
 				const updatedState = Inventory(initialState, BottleActions.addBottle(0));
 
@@ -29,8 +29,8 @@ describe('Reducer -', () => {
 			});
 
 			it('should remove a bottle', () => {
-				const state = State([], [Bottle(0), Bottle(1)]);
-				const expectedState = State([], [Bottle(1)]);
+				const state = InventoryState.create([], [Bottle(0), Bottle(1)]);
+				const expectedState = InventoryState.create([], [Bottle(1)]);
 
 				const updatedState = Inventory(state, BottleActions.removeBottle(0));
 
@@ -38,8 +38,8 @@ describe('Reducer -', () => {
 			});
 
 			it('should fill a bottle', () => {
-				const state = State([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
-				const expectedState = State([Batch(0, 'batch-0')], [Bottle(0, 0), Bottle(1)]);
+				const state = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
+				const expectedState = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0, 0), Bottle(1)]);
 
 				const updatedState = Inventory(state, BottleActions.fill(0, 0));
 
@@ -47,8 +47,8 @@ describe('Reducer -', () => {
 			});
 
 			it('should empty a bottle', () => {
-				const state = State([Batch(0, 'batch-0')], [Bottle(0, 0), Bottle(1)]);
-				const expectedState = State([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
+				const state = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0, 0), Bottle(1)]);
+				const expectedState = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
 
 				const updatedState = Inventory(state, BottleActions.drink(0));
 
@@ -59,8 +59,8 @@ describe('Reducer -', () => {
 		describe('server -', () => {
 
 			it('should merge data', () => {
-				const state = State();
-				const expectedState = State([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
+				const state = new InventoryState();
+				const expectedState = InventoryState.create([Batch(0, 'batch-0')], [Bottle(0), Bottle(1)]);
 				const jsonData = JSON.stringify({
 					batches: [
 						{id: 0, name: 'batch-0'}
@@ -78,8 +78,8 @@ describe('Reducer -', () => {
 		});
 
 		it('requesting data should set isFetching flag to true', () => {
-			const state = State();
-			const expectedState = State([], [], true);
+			const state = new InventoryState();
+			const expectedState = InventoryState.create([], [], { isFetching: true });
 
 			const updatedState = Inventory(state, ServerActions.requestData());
 
