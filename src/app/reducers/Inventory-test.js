@@ -1,7 +1,6 @@
 import { Batch, Bottle } from '../entities/Entities';
 import * as BottleActions from '../actions/Bottle';
 import expect from 'expect';
-import Immutable from 'immutable';
 import Inventory from './Inventory';
 import * as ServerActions from '../actions/Server';
 import { InventoryState } from '../entities/InventoryState';
@@ -89,7 +88,7 @@ describe('Reducer -', () => {
 });
 
 function checkEquality(actual, expected) {
-	if (!Immutable.is(actual, expected)) {
+	if (!actual.equals(expected)) {
 		throw new Error('Expected:\t' + actual + '\n\tto be:\t\t' + expected);
 	}
 };
