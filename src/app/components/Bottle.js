@@ -11,11 +11,16 @@ import shallowCompare from 'react-addons-shallow-compare';
 
 export default class Bottle extends React.Component {
 	render() {
-		const { id, contents, onClick } = this.props;
+		const { id, contents, onDelete, onDrink } = this.props;
 		return (
-			<li className='bottle'
-					onClick={() => onClick(id)}>
-				batch: {contents}
+			<li className='bottle'>
+				<span className='contents'>
+					contents: {contents}
+				</span>
+				<span className='button'
+					onClick={() => onDrink(id)}>Drink</span>
+				<span className='button'
+					onClick={() => onDelete(id)}>Delete</span>
 			</li>
 		);
 	};
@@ -28,5 +33,6 @@ export default class Bottle extends React.Component {
 Bottle.propTypes = {
 	id: PropTypes.number.isRequired,
 	contents: PropTypes.string.isRequired,
-	onClick: PropTypes.func.isRequired
+	onDelete: PropTypes.func.isRequired,
+	onDrink: PropTypes.func.isRequired
 };

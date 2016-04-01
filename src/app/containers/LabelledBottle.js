@@ -19,7 +19,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onClick: (id) => {
+		onDelete: (id) => {
+			dispatch(BottleActions.removeBottle(id));
+		},
+		onDrink: (id) => {
 			dispatch(BottleActions.drink(id));
 		}
 	};
