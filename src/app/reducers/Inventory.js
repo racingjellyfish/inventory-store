@@ -18,7 +18,7 @@ function batches(state = initialState.get('batches'), action) {
 			return state.withMutations((batchList) => {
 				batchData.forEach((batchJson) => {
 					batchList.push(Batch.fromJson(batchJson));
-				})
+				});
 			});
 
 		default:
@@ -45,7 +45,7 @@ function bottles(state = initialState.get('bottles'), action) {
 				bottleData.forEach((bottleJson) => {
 					console.log('bottle json: ' + bottleJson);
 					bottleList.push(Bottle.fromJson(bottleJson));
-				})
+				});
 			});
 
 		default:

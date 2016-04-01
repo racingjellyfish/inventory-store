@@ -12,7 +12,7 @@ describe('ActionCreator -', () => {
 	describe('Server -', () => {
 
 		it('calling dataRequestSuccess returns an action for a successful data request', () => {
-			const jsonData = {"jsonData": 0};
+			const jsonData = {'jsonData': 0};
 
 			expect(Server.dataRequestSuccess(jsonData)).toEqual({
 				type: ActionTypes.DATA_REQUEST_SUCCESS,
