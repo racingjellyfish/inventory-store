@@ -1,14 +1,20 @@
 {
-	"batches": [],
-	"bottles":
-		[
-			{"id": 0, "type": "glass", "volume": 330},
-			{"id": 1, "type": "glass", "volume": 330},
-			{"id": 2, "type": "glass", "volume": 330},
-			{"id": 3, "type": "glass", "volume": 500},
-			{"id": 4, "type": "glass", "volume": 500},
-			{"id": 5, "type": "pet", "volume": 500},
-			{"id": 6, "type": "pet", "volume": 500},
-			{"id": 7, "type": "pet", "volume": 500}
-		]
+	"batches": [
+		{"id": 0, "name": "batch-0"},
+		{"id": 1, "name": "batch-1"}
+	],
+	"bottles": [
+		{"id": 0, "type": "glass", "volume": 330},
+		{"id": 1, "type": "glass", "volume": 330},
+		{"id": 2, "type": "glass", "volume": 330},
+		{"id": 3, "type": "glass", "volume": 500},
+		{"id": 4, "type": "glass", "volume": 500},
+		{"id": 5, "type": "pet", "volume": 500},
+		{"id": 6, "type": "pet", "volume": 500},
+		{"id": 7, "type": "pet", "volume": 500}
+	],
+	"bottleToBatchLookup": [
+		[4, 1],
+		[5, 0]
+	]
 }

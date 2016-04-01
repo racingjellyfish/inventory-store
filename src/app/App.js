@@ -41,11 +41,9 @@ store.dispatch(ServerActions.fetchDataIfNeeded()).then(() => {
 	store.dispatch(Bottle.removeBottle(1));
 	store.dispatch(Bottle.removeBottle(2));
 
-	store.dispatch(Batch.addBatch(0, 'batch-0'));
-	store.dispatch(Batch.addBatch(1, 'batch-1'));
 	store.dispatch(Bottle.fill(0, 0));
 	store.dispatch(Bottle.fill(3, 1));
-	store.dispatch(Bottle.drink(3));
+	store.dispatch(Bottle.drink(4));
 });
 
 // Every time the state changes, log it

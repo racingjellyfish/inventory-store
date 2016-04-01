@@ -60,6 +60,9 @@ function bottleToBatchLookup(state = initialState.get('bottleToBatchLookup'), ac
 		case ActionTypes.FILL_BOTTLE:
 			return state.set(action.payload.bottleId, action.payload.batchId);
 
+		case ActionTypes.DATA_REQUEST_SUCCESS:
+			return new Map(action.payload.json.bottleToBatchLookup);
+
 		default:
 			return state;
 	}
