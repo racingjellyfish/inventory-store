@@ -37,10 +37,7 @@ export function fetchData() {
 		// return a promise that will be resolved/rejected when the API call completes
 		return fetch('http://localhost:8080/data.json')
 			.then((response) => {
-				console.log('response: ' + response);
-				const jsonData = response.json();
-				console.log('json: ' + jsonData);
-				return jsonData;
+				return response.json();
 			})
 			.then((json) => {
 				dispatch(dataRequestSuccess(json));
