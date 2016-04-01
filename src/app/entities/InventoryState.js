@@ -14,15 +14,13 @@ const defaultState = {
 };
 
 export class InventoryState extends Record(defaultState) {
-	static create(batches = defaultBatches, bottles = defaultBottles,
-			bottleToBatchLookup = defaultBottleToBatchLookup,
-			serverState = defaultServerState) {
+	static create(batches, bottles, bottleToBatchLookup, serverState) {
 
 		return new InventoryState({
-			batches: new List(batches),
-			bottles: new List(bottles),
-			bottleToBatchLookup: new Map(bottleToBatchLookup),
-			serverState: new Map(serverState)
+			batches: new List(batches || defaultBatches),
+			bottles: new List(bottles || defaultBottles),
+			bottleToBatchLookup: new Map(bottleToBatchLookup || defaultBottleToBatchLookup),
+			serverState: new Map(serverState || defaultServerState)
 		});
 	}
 };

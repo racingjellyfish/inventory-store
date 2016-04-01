@@ -1,8 +1,9 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import { Batch, Bottle, BottleFromJson } from '../entities/Entities';
+import { Batch } from '../entities/Batch';
+import { Bottle } from '../entities/Bottle';
 import { combineReducers } from 'redux-immutable';
-import { Map } from 'immutable';
 import { InventoryState } from '../entities/InventoryState';
+import { Map } from 'immutable';
 
 const initialState = new InventoryState();
 
@@ -10,13 +11,13 @@ function batches(state = initialState.get('batches'), action) {
 	switch (action.type) {
 		case ActionTypes.ADD_BATCH:
 			return state.set(action.payload.batchId,
-				Batch(action.payload.batchId, action.payload.batchName));
+				Batch.create(action.payload.batchId, action.payload.batchName));
 
 		case ActionTypes.RECEIVE_DATA:
 			const updates = JSON.parse(action.payload.json);
-			return state.withMutations(map => {
-				updates.batches.forEach((batch) => {
-					map.set(batch.id, Map(batch));
+			return state.withMutations((batchList) => {
+				updates.batches.forEach((batchJson) => {
+					batchList.push(Batch.fromJson(batchJson));
 				})
 			});
 
@@ -28,7 +29,10 @@ function batches(state = initialState.get('batches'), action) {
 function bottles(state = initialState.get('bottles'), action) {
 	switch (action.type) {
 		case ActionTypes.ADD_BOTTLE:
-			return state.push(Bottle(action.payload.bottleId));
+			return state.push(Bottle.create(action.payload.bottleId,
+				action.payload.type,
+				action.payload.volume
+			));
 
 		case ActionTypes.REMOVE_BOTTLE:
 			return state.filter((bottle) => {
@@ -37,9 +41,9 @@ function bottles(state = initialState.get('bottles'), action) {
 
 		case ActionTypes.RECEIVE_DATA:
 			const updates = JSON.parse(action.payload.json);
-			return state.withMutations(map => {
-				updates.bottles.forEach((bottle) => {
-					map.set(bottle.id, BottleFromJson(bottle));
+			return state.withMutations((bottleList) => {
+				updates.bottles.forEach((bottleJson) => {
+					bottleList.push(Bottle.fromJson(bottleJson));
 				})
 			});
 
