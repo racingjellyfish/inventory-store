@@ -15,9 +15,9 @@ function batches(state = initialState.get('batches'), action) {
 
 		case ActionTypes.DATA_REQUEST_SUCCESS:
 			const batchData = action.payload.json.batches;
-			return state.withMutations((batchList) => {
+			return state.clear().withMutations((batches) => {
 				batchData.forEach((batchJson) => {
-					batchList.push(Batch.fromJson(batchJson));
+					batches.push(Batch.fromJson(batchJson));
 				});
 			});
 
@@ -41,9 +41,9 @@ function bottles(state = initialState.get('bottles'), action) {
 
 		case ActionTypes.DATA_REQUEST_SUCCESS:
 			const bottleData = action.payload.json.bottles;
-			return state.withMutations((bottleList) => {
+			return state.clear().withMutations((bottles) => {
 				bottleData.forEach((bottleJson) => {
-					bottleList.push(Bottle.fromJson(bottleJson));
+					bottles.push(Bottle.fromJson(bottleJson));
 				});
 			});
 
