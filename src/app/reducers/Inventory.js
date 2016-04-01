@@ -55,9 +55,11 @@ function bottles(state = initialState.get('bottles'), action) {
 function bottleToBatchLookup(state = initialState.get('bottleToBatchLookup'), action) {
 	switch (action.type) {
 		case ActionTypes.DRINK_BOTTLE:
+			// TODO: throw error if already empty?
 			return state.delete(action.payload.bottleId);
 
 		case ActionTypes.FILL_BOTTLE:
+			// TODO: throw error if already full?
 			return state.set(action.payload.bottleId, action.payload.batchId);
 
 		case ActionTypes.DATA_REQUEST_SUCCESS:

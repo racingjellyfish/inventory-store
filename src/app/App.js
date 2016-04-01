@@ -24,15 +24,15 @@ let store = createStore(Inventory, applyMiddleware(
 	thunkMiddleware, loggerMiddleware
 ));
 
-import * as Batch from './actions/Batch';
-import * as Bottle from './actions/Bottle';
-
 ReactDOM.render(
 	<Provider store={store}>
 		<InventoryContainer />
 	</Provider>,
 	document.getElementById('app')
 );
+
+import * as Batch from './actions/Batch';
+import * as Bottle from './actions/Bottle';
 
 store.dispatch(ServerActions.fetchDataIfNeeded()).then(() => {
 	// TEST CODE

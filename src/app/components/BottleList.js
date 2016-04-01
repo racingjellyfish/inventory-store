@@ -16,7 +16,7 @@ export default class BottleList extends React.Component {
 			<div>
 				<div className='bottleListHeader'>Bottles</div>
 				<ul className='bottleList'>
-					{bottles.valueSeq().map((bottle) =>
+					{bottles.map((bottle) =>
 						<LabelledBottle
 							key={bottle.get('id')}
 							bottle={bottle}
