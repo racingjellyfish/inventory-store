@@ -10,10 +10,19 @@ import VisibleBottleList from '../containers/VisibleBottleList';
 
 export default class InventoryRoot extends React.Component {
 	render() {
-		return (
-			<div className='inventoryRoot'>
-				<VisibleBottleList />
-			</div>
-		);
+		const isFetching = this.props.isFetching;
+		if (isFetching) {
+			return (
+				<div className='inventoryRoot'>
+					<div>loading...</div>
+				</div>
+			);
+		} else {
+			return (
+				<div className='inventoryRoot'>
+					<VisibleBottleList />
+				</div>
+			);
+		}
 	};
 }

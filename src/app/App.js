@@ -11,7 +11,7 @@ import './ux/App.less';
 import createLogger from 'redux-logger';
 import { applyMiddleware, createStore } from 'redux';
 import Inventory from './reducers/Inventory';
-import InventoryRoot from './components/InventoryRoot';
+import InventoryContainer from './containers/Inventory';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -26,6 +26,14 @@ let store = createStore(Inventory, applyMiddleware(
 
 import * as Batch from './actions/Batch';
 import * as Bottle from './actions/Bottle';
+
+ReactDOM.render(
+	<Provider store={store}>
+		<InventoryContainer />
+	</Provider>,
+	document.getElementById('app')
+);
+
 store.dispatch(ServerActions.fetchDataIfNeeded()).then(() => {
 	// TEST CODE
 	console.log(store.getState());
@@ -40,17 +48,6 @@ store.dispatch(ServerActions.fetchDataIfNeeded()).then(() => {
 	store.dispatch(Bottle.drink(3));
 });
 
-ReactDOM.render(
-	<Provider store={store}>
-		<InventoryRoot />
-	</Provider>,
-	document.getElementById('app')
-);
-
-
-// Log the initial state
-console.log(JSON.stringify(store.getState()));
-
 // Every time the state changes, log it
 // Note that subscribe() returns a function for unregistering the listener
 let unsubscribe = store.subscribe(() => {
@@ -58,4 +55,4 @@ let unsubscribe = store.subscribe(() => {
 });
 
 // Stop listening to state updates
-unsubscribe();
+// unsubscribe();

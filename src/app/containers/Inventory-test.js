@@ -6,30 +6,30 @@
 import { createStore } from 'redux';
 import expect from 'expect';
 import Inventory from '../reducers/Inventory';
-import InventoryRoot from './InventoryRoot';
+import InventoryContainer from './Inventory';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as ServerActions from '../actions/Server';
 import TestUtils from 'react-addons-test-utils';
 
-
-describe('InventoryRoot', () => {
-	let inventoryRoot;
+describe('InventoryContainer', () => {
+	let inventoryContainer;
 	let store;
 
 	beforeEach(() => {
 		store = createStore(Inventory);
-		inventoryRoot = TestUtils.renderIntoDocument(<Provider store={store}><InventoryRoot /></Provider>);
+		inventoryContainer = TestUtils.renderIntoDocument(<Provider store={store}><InventoryContainer /></Provider>);
 	});
 
 	it('renders without problems', () => {
-		expect(inventoryRoot).toExist();
+		expect(inventoryContainer).toExist();
 	});
 
 	it('contains the expected text', () => {
-		const rootNode = ReactDOM.findDOMNode(inventoryRoot);
+		const rootContainer = ReactDOM.findDOMNode(inventoryContainer);
 
-		expect(rootNode).toExist();
-		expect(rootNode.firstChild.textContent).toBe('Bottles');
+		expect(rootContainer).toExist();
+		expect(rootContainer.firstChild.textContent).toBe('Bottles');
 	});
 });
