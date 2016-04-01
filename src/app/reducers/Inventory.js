@@ -14,9 +14,9 @@ function batches(state = initialState.get('batches'), action) {
 				Batch.create(action.payload.batchId, action.payload.batchName));
 
 		case ActionTypes.DATA_REQUEST_SUCCESS:
-			const updates = JSON.parse(action.payload.json);
+			const batchData = action.payload.json.batches;
 			return state.withMutations((batchList) => {
-				updates.batches.forEach((batchJson) => {
+				batchData.forEach((batchJson) => {
 					batchList.push(Batch.fromJson(batchJson));
 				})
 			});
@@ -40,9 +40,10 @@ function bottles(state = initialState.get('bottles'), action) {
 			});
 
 		case ActionTypes.DATA_REQUEST_SUCCESS:
-			const updates = JSON.parse(action.payload.json);
+			const bottleData = action.payload.json.bottles;
 			return state.withMutations((bottleList) => {
-				updates.bottles.forEach((bottleJson) => {
+				bottleData.forEach((bottleJson) => {
+					console.log('bottle json: ' + bottleJson);
 					bottleList.push(Bottle.fromJson(bottleJson));
 				})
 			});

@@ -1,0 +1,14 @@
+{
+	"batches": [],
+	"bottles":
+		[
+			{"id": 0, "type": "glass", "volume": 330},
+			{"id": 1, "type": "glass", "volume": 330},
+			{"id": 2, "type": "glass", "volume": 330},
+			{"id": 3, "type": "glass", "volume": 500},
+			{"id": 4, "type": "glass", "volume": 500},
+			{"id": 5, "type": "pet", "volume": 500},
+			{"id": 6, "type": "pet", "volume": 500},
+			{"id": 7, "type": "pet", "volume": 500}
+		]
+}

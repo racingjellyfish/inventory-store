@@ -3,16 +3,42 @@
  */
 'use strict';
 
+// ensure relevant polyfills are loaded before other code runs
+import 'babel-polyfill';
+
 import './ux/App.less';
 
-import { createStore } from 'redux';
+import createLogger from 'redux-logger';
+import { applyMiddleware, createStore } from 'redux';
 import Inventory from './reducers/Inventory';
 import InventoryRoot from './components/InventoryRoot';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as ServerActions from './actions/Server';
+import thunkMiddleware from 'redux-thunk';
 
-let store = createStore(Inventory);
+const loggerMiddleware = createLogger();
+
+let store = createStore(Inventory, applyMiddleware(
+	thunkMiddleware, loggerMiddleware
+));
+
+import * as Batch from './actions/Batch';
+import * as Bottle from './actions/Bottle';
+store.dispatch(ServerActions.fetchDataIfNeeded()).then(() => {
+	// TEST CODE
+	console.log(store.getState());
+
+	store.dispatch(Bottle.removeBottle(1));
+	store.dispatch(Bottle.removeBottle(2));
+
+	store.dispatch(Batch.addBatch(0, 'batch-0'));
+	store.dispatch(Batch.addBatch(1, 'batch-1'));
+	store.dispatch(Bottle.fill(0, 0));
+	store.dispatch(Bottle.fill(3, 1));
+	store.dispatch(Bottle.drink(3));
+});
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -21,9 +47,6 @@ ReactDOM.render(
 	document.getElementById('app')
 );
 
-// TEST CODE
-import * as Batch from './actions/Batch';
-import * as Bottle from './actions/Bottle';
 
 // Log the initial state
 console.log(JSON.stringify(store.getState()));
@@ -33,20 +56,6 @@ console.log(JSON.stringify(store.getState()));
 let unsubscribe = store.subscribe(() => {
 	console.log(JSON.stringify(store.getState()));
 });
-
-// Dispatch some actions
-store.dispatch(Bottle.addBottle(0));
-store.dispatch(Bottle.addBottle(1));
-store.dispatch(Bottle.addBottle(2));
-store.dispatch(Bottle.addBottle(3));
-store.dispatch(Bottle.removeBottle(1));
-store.dispatch(Bottle.removeBottle(2));
-
-store.dispatch(Batch.addBatch(0, 'batch-0'));
-store.dispatch(Batch.addBatch(1, 'batch-1'));
-store.dispatch(Bottle.fill(0, 0));
-store.dispatch(Bottle.fill(3, 1));
-store.dispatch(Bottle.drink(3));
 
 // Stop listening to state updates
 unsubscribe();
