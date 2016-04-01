@@ -43,7 +43,6 @@ function bottles(state = initialState.get('bottles'), action) {
 			const bottleData = action.payload.json.bottles;
 			return state.withMutations((bottleList) => {
 				bottleData.forEach((bottleJson) => {
-					console.log('bottle json: ' + bottleJson);
 					bottleList.push(Bottle.fromJson(bottleJson));
 				});
 			});

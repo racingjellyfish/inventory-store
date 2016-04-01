@@ -23,7 +23,7 @@ describe('ActionCreator -', () => {
 		});
 
 		it('calling dataRequestFailure returns an action for a failed data request', () => {
-			expect(Server.dataRequestFailure('request failed')).toEqual({
+			expect(Server.dataRequestFailure(new Error('request failed'))).toEqual({
 				type: ActionTypes.DATA_REQUEST_FAILURE,
 				error: true,
 				payload: new Error('request failed')

@@ -62,7 +62,7 @@ describe('Reducer -', () => {
 			it('should merge data', () => {
 				const state = new InventoryState();
 				const expectedState = InventoryState.create([Batch.create(0, 'batch-0')], [Bottle.create(0), Bottle.create(1)]);
-				const jsonData = JSON.stringify({
+				const jsonData = {
 					batches: [
 						{id: 0, name: 'batch-0'}
 					],
@@ -70,7 +70,7 @@ describe('Reducer -', () => {
 						{id: 0},
 						{id: 1}
 					]
-				});
+				};
 
 				const updatedState = Inventory(state, ServerActions.dataRequestSuccess(jsonData));
 
