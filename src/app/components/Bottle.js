@@ -17,8 +17,14 @@ export default class Bottle extends React.Component {
 				<span className='contents'>
 					contents: {contents}
 				</span>
-				<span className='button'
-					onClick={() => onDrink(id)}>Drink</span>
+				{
+					// TODO: check this is a sensible approach
+					contents === 'empty' ?
+						<span className='button disabled'>Drink</span>
+					:
+						<span className='button enabled'
+							onClick={() => onDrink(id)}>Drink</span>
+				}
 				<span className='button'
 					onClick={() => onDelete(id)}>Delete</span>
 			</li>
