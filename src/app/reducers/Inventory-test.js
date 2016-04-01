@@ -72,7 +72,7 @@ describe('Reducer -', () => {
 					]
 				});
 
-				const updatedState = Inventory(state, ServerActions.receiveData(jsonData));
+				const updatedState = Inventory(state, ServerActions.dataRequestSuccess(jsonData));
 
 				checkEquality(updatedState, expectedState);
 			});

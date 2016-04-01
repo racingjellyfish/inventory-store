@@ -14,5 +14,6 @@ export const ADD_BATCH = 'ADD_BATCH';
 /**
  * server related actions
  */
-export const RECEIVE_DATA = 'RECEIVE_DATA';
+export const DATA_REQUEST_FAILURE = 'DATA_REQUEST_FAILURE';
+export const DATA_REQUEST_SUCCESS = 'DATA_REQUEST_SUCCESS';
 export const REQUEST_DATA = 'REQUEST_DATA';

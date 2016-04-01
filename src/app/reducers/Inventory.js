@@ -13,7 +13,7 @@ function batches(state = initialState.get('batches'), action) {
 			return state.set(action.payload.batchId,
 				Batch.create(action.payload.batchId, action.payload.batchName));
 
-		case ActionTypes.RECEIVE_DATA:
+		case ActionTypes.DATA_REQUEST_SUCCESS:
 			const updates = JSON.parse(action.payload.json);
 			return state.withMutations((batchList) => {
 				updates.batches.forEach((batchJson) => {
@@ -39,7 +39,7 @@ function bottles(state = initialState.get('bottles'), action) {
 				return bottle.get('id') !== action.payload.bottleId;
 			});
 
-		case ActionTypes.RECEIVE_DATA:
+		case ActionTypes.DATA_REQUEST_SUCCESS:
 			const updates = JSON.parse(action.payload.json);
 			return state.withMutations((bottleList) => {
 				updates.bottles.forEach((bottleJson) => {
@@ -70,7 +70,7 @@ function serverState(state = initialState.get('serverState'), action) {
 		case ActionTypes.REQUEST_DATA:
 			return state.set('isFetching', true);
 
-		case ActionTypes.RECEIVE_DATA:
+		case ActionTypes.DATA_REQUEST_SUCCESS:
 			return state.set('isFetching', false);
 
 		default:

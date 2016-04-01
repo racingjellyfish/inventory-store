@@ -11,14 +11,22 @@ describe('ActionCreator -', () => {
 
 	describe('Server -', () => {
 
-		it('calling receiveData returns an action to receive data', () => {
+		it('calling dataRequestSuccess returns an action for a successful data request', () => {
 			const jsonData = {"jsonData": 0};
 
-			expect(Server.receiveData(jsonData)).toEqual({
-				type: ActionTypes.RECEIVE_DATA,
+			expect(Server.dataRequestSuccess(jsonData)).toEqual({
+				type: ActionTypes.DATA_REQUEST_SUCCESS,
 				payload: {
 					json: jsonData
 				}
+			});
+		});
+
+		it('calling dataRequestFailure returns an action for a failed data request', () => {
+			expect(Server.dataRequestFailure('request failed')).toEqual({
+				type: ActionTypes.DATA_REQUEST_FAILURE,
+				error: true,
+				payload: new Error('request failed')
 			});
 		});
 

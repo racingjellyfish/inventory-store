@@ -3,9 +3,17 @@ import * as ActionTypes from '../constants/ActionTypes';
 /**
  * server related actions
  */
-export function receiveData(json) {
+export function dataRequestFailure(errorMsg) {
 	return {
-		type: ActionTypes.RECEIVE_DATA,
+		type: ActionTypes.DATA_REQUEST_FAILURE,
+		error: true,
+		payload: new Error(errorMsg)
+	};
+};
+
+export function dataRequestSuccess(json) {
+	return {
+		type: ActionTypes.DATA_REQUEST_SUCCESS,
 		payload: {
 			json: json
 			// ,
