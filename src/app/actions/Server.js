@@ -4,11 +4,11 @@ import fetch from 'isomorphic-fetch';
 /**
  * server related actions
  */
-export function dataRequestFailure(errorMsg) {
+export function dataRequestFailure(error) {
 	return {
 		type: ActionTypes.DATA_REQUEST_FAILURE,
 		error: true,
-		payload: new Error(errorMsg)
+		payload: error
 	};
 };
 
