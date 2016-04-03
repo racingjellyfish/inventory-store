@@ -4,9 +4,9 @@
 'use strict';
 
 let bodyParser = require('body-parser');
-let path = require('path');
 let express = require('express');
 let fs = require('fs');
+let path = require('path');
 
 let DATA_FILE = path.join(__dirname, '../public/data.json');
 
