@@ -13,14 +13,15 @@ const mapStateToProps = (state, ownProps) => {
 	const bottle = ownProps.bottle;
 	return {
 		id: bottle.get('id'),
-		contents: getContents(state, bottle)
+		contents: getContents(state, bottle),
+		deleting: bottle.get('deleting')
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onDelete: (id) => {
-			dispatch(BottleActions.removeBottle(id));
+			dispatch(BottleActions.deleteBottle(id));
 		},
 		onDrink: (id) => {
 			dispatch(BottleActions.drink(id));

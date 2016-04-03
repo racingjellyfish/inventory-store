@@ -39,13 +39,25 @@ function bottles(state = initialState.get('bottles'), action) {
 				return bottle.get('id') !== action.payload.bottleId;
 			});
 
+		case ActionTypes.BOTTLE_REMOVAL_SUCCESS:
 		case ActionTypes.DATA_REQUEST_SUCCESS:
-			const bottleData = action.payload.json.bottles;
+			const bottlesData = action.payload.json.bottles;
 			return state.clear().withMutations((bottles) => {
-				bottleData.forEach((bottleJson) => {
+				bottlesData.forEach((bottleJson) => {
 					bottles.push(Bottle.fromJson(bottleJson));
 				});
 			});
+
+		case ActionTypes.REMOVE_ITEM_REQUEST:
+			if (action.payload.type === 'bottle') {
+				return state.map((bottle) => {
+					if (bottle.get('id') === action.payload.id) {
+						bottle = bottle.set('deleting', true);
+					}
+					return bottle;
+				});
+			}
+			return state;
 
 		default:
 			return state;

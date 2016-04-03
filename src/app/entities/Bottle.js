@@ -5,6 +5,7 @@ const defaultType = BottleProps.GLASS;
 const defaultVolume = 500;
 const defaultBottle = {
 	id: undefined,
+	deleting: false,
 	type: defaultType,
 	volume: defaultVolume
 };
