@@ -21,7 +21,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onDelete: (id) => {
-			dispatch(BottleActions.deleteBottle(id));
+			dispatch(BottleActions.remove(id));
 		},
 		onDrink: (id) => {
 			dispatch(BottleActions.drink(id));

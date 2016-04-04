@@ -13,19 +13,10 @@ export function addBottle(bottleId) {
 	};
 };
 
-export function removeBottle(bottleId) {
-	return {
-		type: ActionTypes.REMOVE_BOTTLE,
-		payload: {
-			bottleId: bottleId
-		}
-	};
-};
-
-export function deleteBottle(bottleId) {
+export function remove(id) {
 	return ServerActions.deleteItem({
 		type: 'bottle',
-		id: bottleId
+		id: id
 	});
 };
 
