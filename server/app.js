@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 app.use('/', express.static(path.join(__dirname, '../public')));
 
-app.post('/api/bottle', function(req, res) {
+app.delete('/api/bottle', function(req, res) {
 	fs.readFile(DATA_FILE, function(err, data) {
 		if (err) {
 			console.error(err);

@@ -32,7 +32,7 @@ export function deleteBottle(bottleId) {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
 				},
-				method: "POST",
+				method: "DELETE",
 				body: JSON.stringify({id: bottleId})
 			}).then((response) => {
 				return response.json();
