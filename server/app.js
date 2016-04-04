@@ -30,8 +30,10 @@ app.delete('/api/bottle', function(req, res) {
 	fs.readFile(DATA_FILE, function(err, data) {
 		if (err) {
 			console.error(err);
-			process.exit(1);
+			res.status(500).send(err);
 		}
+
+		// update model
 		var id = req.body.id;
 		var inventoryState = JSON.parse(data);
 		inventoryState.bottles = inventoryState.bottles.filter(function(bottle) {
@@ -41,11 +43,17 @@ app.delete('/api/bottle', function(req, res) {
 			inventoryState.bottleToBatchLookup.filter(function(bottleToBatch) {
 			return bottleToBatch[0] != id;
 		});
-		fs.writeFile(DATA_FILE, JSON.stringify(inventoryState, null, 4), function(err) {
+
+		// update data file using naive approach to preventing data corruption
+		let tmpFile = DATA_FILE + '-' + Date.now();
+		fs.writeFile(tmpFile, JSON.stringify(inventoryState, null, 4), function(err) {
 			if (err) {
 				console.error(err);
-				process.exit(1);
+				fs.unlinkSync(tmpFile);
+				res.status(500).send(err);
 			}
+			fs.unlinkSync(DATA_FILE);
+			fs.renameSync(tmpFile, DATA_FILE);
 			res.json(inventoryState);
 		});
 	});
