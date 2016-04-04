@@ -26,7 +26,26 @@ export function bottles(state = initialState.get('bottles'), action) {
 				return state;
 			}
 			if (action.error) {
-				console.error('problems deleting bottle: ' + action.meta.id + '\n\tdue to: ' + action.payload);
+				console.error('problems deleting bottle: ' + action.meta.id +
+					'\n\tdue to: ' + action.payload);
+				return updateBottleStatus(state, action.meta.id, 'OK');
+			}
+			return readBottleData(state, action.payload.json);
+
+		case ActionTypes.UPDATE_ITEM_REQUEST:
+			if (action.meta.type !== 'bottle') {
+				return state;
+			}
+			return updateBottleStatus(state, action.meta.id, action.meta.action);
+
+		case ActionTypes.UPDATE_ITEM_RESPONSE:
+			if (action.meta.type !== 'bottle') {
+				return state;
+			}
+			if (action.error) {
+				console.error('problems updating bottle: ' + action.meta.id +
+					'\n\twith action: ' + action.meta.action +
+					'\n\tdue to: ' + action.payload);
 				return updateBottleStatus(state, action.meta.id, 'OK');
 			}
 			return readBottleData(state, action.payload.json);

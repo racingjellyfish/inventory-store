@@ -59,6 +59,47 @@ app.delete('/api/bottle', function(req, res) {
 	});
 });
 
+app.put('/api/bottle', function(req, res) {
+	fs.readFile(DATA_FILE, function(err, data) {
+		if (err) {
+			console.error(err);
+			res.status(500).send(err);
+		}
+
+		// update model
+		var id = req.body.id;
+		var action = req.body.action;
+		var inventoryState = JSON.parse(data);
+
+		switch (action) {
+			case 'DRINKING':
+				inventoryState.bottleToBatchLookup =
+					inventoryState.bottleToBatchLookup.filter(function(bottleToBatch) {
+					return bottleToBatch[0] != id;
+				});
+				break;
+
+			default:
+				var actionError = 'unknown action: ' + action;
+				console.error(actionError);
+				res.status(500).send(actionError);
+		}
+
+		// update data file using naive approach to preventing data corruption
+		let tmpFile = DATA_FILE + '-' + Date.now();
+		fs.writeFile(tmpFile, JSON.stringify(inventoryState, null, 4), function(err) {
+			if (err) {
+				console.error(err);
+				fs.unlinkSync(tmpFile);
+				res.status(500).send(err);
+			}
+			fs.unlinkSync(DATA_FILE);
+			fs.renameSync(tmpFile, DATA_FILE);
+			res.json(inventoryState);
+		});
+	});
+});
+
 app.listen(app.get('port'), () => {
 	console.log('Server started: http://localhost:' + app.get('port') + '/');
 });

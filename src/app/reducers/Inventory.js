@@ -28,16 +28,23 @@ function batches(state = initialState.get('batches'), action) {
 };
 
 function bottleToBatchLookup(state = initialState.get('bottleToBatchLookup'), action) {
-	switch (action.type) {
-		case ActionTypes.DRINK_BOTTLE:
-			// TODO: throw error if already empty?
-			return state.delete(action.payload.bottleId);
+	if (action.error) {
+		console.error('problems updating item: ' + action.meta.id +
+			'\n\tof type: ' + action.meta.type +
+			'\n\twith action: ' + action.meta.action +
+			'\n\tdue to: ' + action.payload);
+		return state;
+	}
 
+	switch (action.type) {
 		case ActionTypes.FILL_BOTTLE:
 			// TODO: throw error if already full?
 			return state.set(action.payload.bottleId, action.payload.batchId);
 
 		case ActionTypes.DATA_REQUEST_SUCCESS:
+			return new Map(action.payload.json.bottleToBatchLookup);
+
+		case ActionTypes.UPDATE_ITEM_RESPONSE:
 			return new Map(action.payload.json.bottleToBatchLookup);
 
 		default:

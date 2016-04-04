@@ -128,3 +128,60 @@ function itemDeleteFailed(item, error) {
 		payload: error
 	};
 };
+
+/**
+ * generic item update action
+ */
+export function updateItem(item) {
+	return function (dispatch) {
+		// update app state to show that the API call has started
+		dispatch(requestItemUpdate(item));
+
+		// return a promise that will be resolved/rejected when the API call completes
+		return fetch('/api/' + item.type, {
+				headers: {
+					'accept': 'application/json',
+					'content-type': 'application/json'
+				},
+				method: 'put',
+				body: JSON.stringify({
+					id: item.id,
+					action: item.action
+				})
+			}).then((response) => {
+				return response.json();
+			}).then((json) => {
+				dispatch(itemUpdateSucceeded(item, json));
+			}).catch((error) => {
+				dispatch(itemUpdateFailed(item, error));
+			});
+	};
+};
+
+function requestItemUpdate(item) {
+	return {
+		type: ActionTypes.UPDATE_ITEM_REQUEST,
+		meta: item
+	};
+};
+
+function itemUpdateSucceeded(item, json) {
+	return {
+		type: ActionTypes.UPDATE_ITEM_RESPONSE,
+		meta: {
+			type: item.type
+		},
+		payload: {
+			json: json
+		}
+	};
+};
+
+function itemUpdateFailed(item, error) {
+	return {
+		type: ActionTypes.UPDATE_ITEM_RESPONSE,
+		meta: item,
+		error: true,
+		payload: error
+	};
+};

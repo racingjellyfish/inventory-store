@@ -3,7 +3,6 @@
  */
 export const ADD_BOTTLE = 'ADD_BOTTLE';
 export const FILL_BOTTLE = 'FILL_BOTTLE';
-export const DRINK_BOTTLE = 'DRINK_BOTTLE';
 
 /**
  * batch related actions
@@ -19,3 +18,6 @@ export const REQUEST_DATA = 'REQUEST_DATA';
 
 export const DELETE_ITEM_REQUEST = 'DELETE_ITEM_REQUEST';
 export const DELETE_ITEM_RESPONSE = 'DELETE_ITEM_RESPONSE';
+
+export const UPDATE_ITEM_REQUEST = 'UPDATE_ITEM_REQUEST';
+export const UPDATE_ITEM_RESPONSE = 'UPDATE_ITEM_RESPONSE';

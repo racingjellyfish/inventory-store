@@ -20,21 +20,20 @@ export function remove(id) {
 	});
 };
 
+export function drink(id) {
+	return ServerActions.updateItem({
+		type: 'bottle',
+		id: id,
+		action: 'DRINKING'
+	});
+};
+
 export function fill(bottleId, batchId) {
 	return {
 		type: ActionTypes.FILL_BOTTLE,
 		payload: {
 			bottleId: bottleId,
 			batchId: batchId
-		}
-	};
-};
-
-export function drink(bottleId) {
-	return {
-		type: ActionTypes.DRINK_BOTTLE,
-		payload: {
-			bottleId: bottleId
 		}
 	};
 };
