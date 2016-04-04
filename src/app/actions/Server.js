@@ -74,3 +74,57 @@ export function fetchDataIfNeeded() {
 		}
 	};
 };
+
+/**
+ * generic item delete action
+ */
+export function deleteItem(item) {
+	return function (dispatch) {
+		// update app state to show that the API call has started
+		dispatch(requestItemDelete(item));
+
+		// return a promise that will be resolved/rejected when the API call completes
+		return fetch('/api/' + item.type, {
+				headers: {
+					'accept': 'application/json',
+					'content-type': 'application/json'
+				},
+				method: 'delete',
+				body: JSON.stringify({id: item.id})
+			}).then((response) => {
+				return response.json();
+			}).then((json) => {
+				dispatch(itemDeleteSucceeded(item, json));
+			}).catch((error) => {
+				dispatch(itemDeleteFailed(item, error));
+			});
+	};
+};
+
+function requestItemDelete(item) {
+	return {
+		type: ActionTypes.DELETE_ITEM_REQUEST,
+		meta: item
+	};
+};
+
+function itemDeleteSucceeded(item, json) {
+	return {
+		type: ActionTypes.DELETE_ITEM_RESPONSE,
+		meta: {
+			type: item.type
+		},
+		payload: {
+			json: json
+		}
+	};
+};
+
+function itemDeleteFailed(item, error) {
+	return {
+		type: ActionTypes.DELETE_ITEM_RESPONSE,
+		meta: item,
+		error: true,
+		payload: error
+	};
+};

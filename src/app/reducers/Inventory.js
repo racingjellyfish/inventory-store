@@ -39,30 +39,47 @@ function bottles(state = initialState.get('bottles'), action) {
 				return bottle.get('id') !== action.payload.bottleId;
 			});
 
-		case ActionTypes.BOTTLE_REMOVAL_SUCCESS:
 		case ActionTypes.DATA_REQUEST_SUCCESS:
-			const bottlesData = action.payload.json.bottles;
-			return state.clear().withMutations((bottles) => {
-				bottlesData.forEach((bottleJson) => {
-					bottles.push(Bottle.fromJson(bottleJson));
-				});
+			return readBottleData(state, action.payload.json);
+
+		case ActionTypes.DELETE_ITEM_REQUEST:
+			if (action.meta.type !== 'bottle') {
+				return state;
+			}
+			return state.map((bottle) => {
+				if (bottle.get('id') === action.meta.id) {
+					bottle = bottle.set('deleting', true);
+				}
+				return bottle;
 			});
 
-		case ActionTypes.REMOVE_ITEM_REQUEST:
-			if (action.payload.type === 'bottle') {
+		case ActionTypes.DELETE_ITEM_RESPONSE:
+			if (action.meta.type !== 'bottle') {
+				return state;
+			}
+			if (action.error) {
 				return state.map((bottle) => {
-					if (bottle.get('id') === action.payload.id) {
-						bottle = bottle.set('deleting', true);
+					if (bottle.get('id') === action.meta.id) {
+						bottle = bottle.set('deleting', false);
 					}
 					return bottle;
 				});
 			}
-			return state;
+			return readBottleData(state, action.payload.json);
 
 		default:
 			return state;
 	}
 };
+
+function readBottleData(state, jsonData) {
+	const bottlesData = jsonData.bottles;
+	return state.clear().withMutations((bottles) => {
+		bottlesData.forEach((bottleJson) => {
+			bottles.push(Bottle.fromJson(bottleJson));
+		});
+	});
+}
 
 function bottleToBatchLookup(state = initialState.get('bottleToBatchLookup'), action) {
 	switch (action.type) {
