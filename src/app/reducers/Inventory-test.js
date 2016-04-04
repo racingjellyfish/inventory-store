@@ -5,7 +5,7 @@ import expect from 'expect';
 import Inventory from './Inventory';
 import { InventoryState } from '../entities/InventoryState';
 import * as ServerActions from '../actions/Server';
-import { List, Map, Record } from 'immutable';
+import { Map } from 'immutable';
 
 describe('Reducer -', () => {
 	const initialState = new InventoryState();
@@ -38,16 +38,16 @@ describe('Reducer -', () => {
 
 				checkEquality(updatedState, expectedState);
 			});
-		});
 
-		it('requesting data should set isFetching flag to true', () => {
-			const state = new InventoryState();
-			const serverState = new Map({ isFetching: true });
-			const expectedState = new InventoryState({ serverState: serverState });
+			it('requesting data should set isFetching flag to true', () => {
+				const state = new InventoryState();
+				const serverState = new Map({ isFetching: true });
+				const expectedState = new InventoryState({ serverState: serverState });
 
-			const updatedState = Inventory(state, ServerActions.requestData());
+				const updatedState = Inventory(state, ServerActions.requestData());
 
-			checkEquality(updatedState, expectedState);
+				checkEquality(updatedState, expectedState);
+			});
 		});
 	});
 });
