@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		id: bottle.get('id'),
 		contents: getContents(state, bottle),
-		deleting: bottle.get('deleting')
+		status: bottle.get('status') || 'OK'
 	};
 };
 

@@ -46,24 +46,15 @@ function bottles(state = initialState.get('bottles'), action) {
 			if (action.meta.type !== 'bottle') {
 				return state;
 			}
-			return state.map((bottle) => {
-				if (bottle.get('id') === action.meta.id) {
-					bottle = bottle.set('deleting', true);
-				}
-				return bottle;
-			});
+			return updateBottleStatus(state, action.meta.id, 'DELETING');
 
 		case ActionTypes.DELETE_ITEM_RESPONSE:
 			if (action.meta.type !== 'bottle') {
 				return state;
 			}
 			if (action.error) {
-				return state.map((bottle) => {
-					if (bottle.get('id') === action.meta.id) {
-						bottle = bottle.set('deleting', false);
-					}
-					return bottle;
-				});
+				console.error('problems deleting bottle: ' + action.meta.id + '\n\tdue to: ' + action.payload);
+				return updateBottleStatus(state, action.meta.id, 'OK');
 			}
 			return readBottleData(state, action.payload.json);
 
@@ -78,6 +69,15 @@ function readBottleData(state, jsonData) {
 		bottlesData.forEach((bottleJson) => {
 			bottles.push(Bottle.fromJson(bottleJson));
 		});
+	});
+};
+
+function updateBottleStatus(state, bottleId, status) {
+	return state.map((bottle) => {
+		if (bottle.get('id') === bottleId) {
+			bottle = bottle.set('status', status);
+		}
+		return bottle;
 	});
 }
 
