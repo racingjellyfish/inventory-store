@@ -19,44 +19,6 @@ describe('Reducer -', () => {
 			});
 		});
 
-		describe('bottles -', () => {
-
-			it('should add a bottle', () => {
-				const expectedState = InventoryState.create([], [Bottle.create(0)]);
-
-				const updatedState = Inventory(initialState, BottleActions.addBottle(0));
-
-				checkEquality(updatedState, expectedState);
-			});
-
-			it('should remove a bottle', () => {
-				const state = InventoryState.create([], [Bottle.create(0), Bottle.create(1)]);
-				const expectedState = InventoryState.create([], [Bottle.create(1)]);
-
-				const updatedState = Inventory(state, BottleActions.removeBottle(0));
-
-				checkEquality(updatedState, expectedState);
-			});
-
-			it('should fill a bottle', () => {
-				const state = InventoryState.create([Batch.create(0, 'batch-0')], [Bottle.create(0), Bottle.create(1)]);
-				const expectedState = InventoryState.create([Batch.create(0, 'batch-0')], [Bottle.create(0), Bottle.create(1)], [[0, 0]]);
-
-				const updatedState = Inventory(state, BottleActions.fill(0, 0));
-
-				checkEquality(updatedState, expectedState);
-			});
-
-			it('should empty a bottle', () => {
-				const state = InventoryState.create([Batch.create(0, 'batch-0')], [Bottle.create(0), Bottle.create(1)], [[0, 0]]);
-				const expectedState = InventoryState.create([Batch.create(0, 'batch-0')], [Bottle.create(0), Bottle.create(1)]);
-
-				const updatedState = Inventory(state, BottleActions.drink(0));
-
-				checkEquality(updatedState, expectedState);
-			});
-		});
-
 		describe('server -', () => {
 
 			it('should merge data', () => {
