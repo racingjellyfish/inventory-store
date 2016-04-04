@@ -144,10 +144,7 @@ export function updateItem(item) {
 					'content-type': 'application/json'
 				},
 				method: 'put',
-				body: JSON.stringify({
-					id: item.id,
-					action: item.action
-				})
+				body: JSON.stringify(item)
 			}).then((response) => {
 				return response.json();
 			}).then((json) => {

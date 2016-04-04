@@ -28,12 +28,11 @@ export function drink(id) {
 	});
 };
 
-export function fill(bottleId, batchId) {
-	return {
-		type: ActionTypes.FILL_BOTTLE,
-		payload: {
-			bottleId: bottleId,
-			batchId: batchId
-		}
-	};
+export function fill(id, batchId) {
+	return ServerActions.updateItem({
+		type: 'bottle',
+		id: id,
+		batchId: batchId,
+		action: 'FILLING'
+	});
 };

@@ -67,15 +67,20 @@ app.put('/api/bottle', function(req, res) {
 		}
 
 		// update model
-		var id = req.body.id;
+		var bottleId = req.body.id;
+		var batchId = req.body.batchId;
 		var action = req.body.action;
 		var inventoryState = JSON.parse(data);
 
 		switch (action) {
+			case 'FILLING':
+				inventoryState.bottleToBatchLookup.push([bottleId, batchId]);
+				break;
+
 			case 'DRINKING':
 				inventoryState.bottleToBatchLookup =
 					inventoryState.bottleToBatchLookup.filter(function(bottleToBatch) {
-					return bottleToBatch[0] != id;
+					return bottleToBatch[0] != bottleId;
 				});
 				break;
 
