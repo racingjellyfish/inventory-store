@@ -5,10 +5,6 @@ export const ADD_BOTTLE = 'ADD_BOTTLE';
 export const FILL_BOTTLE = 'FILL_BOTTLE';
 export const DRINK_BOTTLE = 'DRINK_BOTTLE';
 
-export const REMOVE_BOTTLE = 'REMOVE_BOTTLE';
-export const BOTTLE_REMOVAL_SUCCESS = 'BOTTLE_REMOVAL_SUCCESS';
-export const BOTTLE_REMOVAL_FAILURE = 'BOTTLE_REMOVAL_FAILURE';
-
 /**
  * batch related actions
  */

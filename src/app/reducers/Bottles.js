@@ -12,11 +12,6 @@ export function bottles(state = initialState.get('bottles'), action) {
 				action.payload.volume
 			));
 
-		case ActionTypes.REMOVE_BOTTLE:
-			return state.filter((bottle) => {
-				return bottle.get('id') !== action.payload.bottleId;
-			});
-
 		case ActionTypes.DATA_REQUEST_SUCCESS:
 			return readBottleData(state, action.payload.json);
 
