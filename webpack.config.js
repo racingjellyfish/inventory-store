@@ -16,5 +16,11 @@ module.exports = {
 	},
 	plugins: IN_PROD ? [
 		new webpack.optimize.UglifyJsPlugin({minimize: true})
-	] : []
+	] : [],
+
+	devServer: {
+		proxy: {
+			'/api/*': 'http://localhost:8181'
+		}
+	}
 };

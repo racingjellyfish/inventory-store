@@ -27,7 +27,7 @@ export function deleteBottle(bottleId) {
 		dispatch(requestBottleRemoval(bottleId));
 
 		// return a promise that will be resolved/rejected when the API call completes
-		return fetch('http://localhost:8181/api/bottle', {
+		return fetch('/api/bottle', {
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
