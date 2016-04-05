@@ -1,8 +1,8 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import * as BottleProps from '../constants/BottleProps';
+import * as BottleConstants from '../constants/Bottle';
 import * as ServerActions from './Server';
 
-/**
+/*
  * bottle related actions
  */
 export function addBottle(bottleId) {
@@ -16,14 +16,14 @@ export function addBottle(bottleId) {
 
 export function remove(id) {
 	return ServerActions.deleteItem({
-		type: BottleProps.TYPE,
+		type: BottleConstants.TYPE,
 		id: id
 	});
 };
 
 export function drink(id) {
 	return ServerActions.updateItem({
-		type: BottleProps.TYPE,
+		type: BottleConstants.TYPE,
 		id: id,
 		action: ActionTypes.DRINK
 	});
@@ -31,7 +31,7 @@ export function drink(id) {
 
 export function fill(id, batchId) {
 	return ServerActions.updateItem({
-		type: BottleProps.TYPE,
+		type: BottleConstants.TYPE,
 		id: id,
 		batchId: batchId,
 		action: ActionTypes.FILL

@@ -1,4 +1,3 @@
-import * as BottleProps from '../constants/BottleProps';
 import { Record } from 'immutable';
 
 const defaultBatch = {
