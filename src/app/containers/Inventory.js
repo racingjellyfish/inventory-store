@@ -1,4 +1,7 @@
-import InventoryRoot from '../components/InventoryRoot';
+/**
+ * wrapper for top-level component
+ */
+import InventoryComponent from '../components/Inventory';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
@@ -9,6 +12,6 @@ const mapStateToProps = (state) => {
 
 const Inventory = connect(
 	mapStateToProps
-)(InventoryRoot);
+)(InventoryComponent);
 
 export default Inventory;

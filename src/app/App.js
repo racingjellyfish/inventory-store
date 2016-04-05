@@ -29,8 +29,8 @@ let store = createStore(Inventory, applyMiddleware(
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={hashHistory}>
-			<Route path="/" component={InventoryContainer}/>
-			<Route path="/batches" component={VisibleBatchList}/>
+			<Route path="/" component={InventoryContainer} />
+			<Route path="/batches" component={VisibleBatchList} />
 		</Router>
 	</Provider>,
 	document.getElementById('app')

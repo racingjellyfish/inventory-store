@@ -1,9 +1,9 @@
 /**
- * a simple root component
+ * top-level component
  */
 'use strict';
 
-import './ux/InventoryRoot.less';
+import './ux/Inventory.less';
 
 import { Link } from 'react-router';
 import React from 'react';
@@ -14,13 +14,13 @@ export default class InventoryRoot extends React.Component {
 		const isFetching = this.props.isFetching;
 		if (isFetching) {
 			return (
-				<div className='inventoryRoot'>
+				<div className='inventory'>
 					<div>loading...</div>
 				</div>
 			);
 		} else {
 			return (
-				<div className='inventoryRoot'>
+				<div className='inventory'>
 					<h1>Inventory</h1>
 					<ul className="nav">
 						<li><Link to="/batches">Batches</Link></li>
