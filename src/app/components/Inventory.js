@@ -5,9 +5,9 @@
 
 import './ux/Inventory.less';
 
+import FilteredBottleListContainer from '../containers/FilteredBottleList';
 import { Link } from 'react-router';
 import React from 'react';
-import VisibleBottleList from '../containers/VisibleBottleList';
 
 export default class InventoryRoot extends React.Component {
 	render() {
@@ -25,7 +25,7 @@ export default class InventoryRoot extends React.Component {
 					<ul className="nav">
 						<li><Link to="/batches">Batches</Link></li>
 					</ul>
-					<VisibleBottleList />
+					<FilteredBottleListContainer />
 				</div>
 			);
 		}

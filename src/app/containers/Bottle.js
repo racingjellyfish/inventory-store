@@ -1,5 +1,5 @@
 import * as BottleActions from '../actions/Bottle';
-import Bottle from '../components/Bottle';
+import BottleComponent from '../components/Bottle';
 import { connect } from 'react-redux';
 
 const getContents = (state, bottle) => {
@@ -29,9 +29,9 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-const LabelledBottle = connect(
+const Bottle = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Bottle);
+)(BottleComponent);
 
-export default LabelledBottle;
+export default Bottle;

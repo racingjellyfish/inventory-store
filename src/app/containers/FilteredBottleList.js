@@ -1,5 +1,5 @@
 import * as BottleActions from '../actions/Bottle';
-import BottleList from '../components/BottleList';
+import BottleListComponent from '../components/BottleList';
 import { connect } from 'react-redux';
 
 const getVisibleBottles = (bottles, filter) => {
@@ -27,9 +27,9 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-const VisibleBottleList = connect(
+const FilteredBottleList = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(BottleList);
+)(BottleListComponent);
 
-export default VisibleBottleList;
+export default FilteredBottleList;
