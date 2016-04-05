@@ -8,8 +8,9 @@ import 'babel-polyfill';
 
 import './ux/App.less';
 
-import createLogger from 'redux-logger';
 import { applyMiddleware, createStore } from 'redux';
+import createLogger from 'redux-logger';
+import FilteredBatchListContainer from './containers/FilteredBatchList';
 import Inventory from './reducers/Inventory';
 import InventoryContainer from './containers/Inventory';
 import { Provider } from 'react-redux';
@@ -18,7 +19,6 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
 import * as ServerActions from './actions/Server';
 import thunkMiddleware from 'redux-thunk';
-import VisibleBatchList from './containers/VisibleBatchList';
 
 const loggerMiddleware = createLogger();
 
@@ -30,7 +30,7 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Router history={hashHistory}>
 			<Route path="/" component={InventoryContainer} />
-			<Route path="/batches" component={VisibleBatchList} />
+			<Route path="/batches" component={FilteredBatchListContainer} />
 		</Router>
 	</Provider>,
 	document.getElementById('app')

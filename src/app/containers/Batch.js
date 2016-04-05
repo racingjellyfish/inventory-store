@@ -1,5 +1,5 @@
 import * as BatchActions from '../actions/Batch';
-import Batch from '../components/Batch';
+import BatchComponent from '../components/Batch';
 import { connect } from 'react-redux';
 
 const getBottleCount = (state, batch) => {
@@ -33,6 +33,6 @@ const mapDispatchToProps = (dispatch) => {
 const LabelledBatch = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Batch);
+)(BatchComponent);
 
 export default LabelledBatch;

@@ -1,5 +1,5 @@
 import * as BatchActions from '../actions/Batch';
-import BatchList from '../components/BatchList';
+import BatchListComponent from '../components/BatchList';
 import { connect } from 'react-redux';
 
 const getVisibleBatches = (batches, filter) => {
@@ -27,9 +27,9 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-const VisibleBatchList = connect(
+const FilteredBatchList = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(BatchList);
+)(BatchListComponent);
 
-export default VisibleBatchList;
+export default FilteredBatchList;

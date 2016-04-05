@@ -5,7 +5,7 @@
 
 import './ux/BatchList.less';
 
-import LabelledBatch from '../containers/LabelledBatch';
+import BatchContainer from '../containers/Batch';
 import { PropTypes } from 'react';
 import React from 'react';
 
@@ -17,7 +17,7 @@ export default class BatchList extends React.Component {
 				<div className='batchListHeader'>Batches</div>
 				<ul className='batchList'>
 					{batches.map((batch) =>
-						<LabelledBatch
+						<BatchContainer
 							key={batch.get('id')}
 							batch={batch}
 							onClick={this.props.onBatchClick} />
