@@ -30,7 +30,10 @@ app.delete('/api/bottle', function(req, res) {
 	fs.readFile(DATA_FILE, function(err, data) {
 		if (err) {
 			console.error(err);
-			res.status(500).send(err);
+			res.json({
+				error: true,
+				message: err
+			});
 		}
 
 		// update model
@@ -48,9 +51,12 @@ app.delete('/api/bottle', function(req, res) {
 		let tmpFile = DATA_FILE + '-' + Date.now();
 		fs.writeFile(tmpFile, JSON.stringify(inventoryState, null, 4), function(err) {
 			if (err) {
-				console.error(err);
 				fs.unlinkSync(tmpFile);
-				res.status(500).send(err);
+				console.error(err);
+				res.json({
+					error: true,
+					message: err
+				});
 			}
 			fs.unlinkSync(DATA_FILE);
 			fs.renameSync(tmpFile, DATA_FILE);
@@ -63,18 +69,30 @@ app.put('/api/bottle', function(req, res) {
 	fs.readFile(DATA_FILE, function(err, data) {
 		if (err) {
 			console.error(err);
-			res.status(500).send(err);
+			res.json({
+				error: true,
+				message: err
+			});
 		}
 
-		// update model
 		var bottleId = req.body.id;
 		var batchId = req.body.batchId;
 		var action = req.body.action;
 		var inventoryState = JSON.parse(data);
 
+		var actionError;
+
+		// update model
 		switch (action) {
 			case 'FILLING':
-				inventoryState.bottleToBatchLookup.push([bottleId, batchId]);
+				var fullBottle = inventoryState.bottleToBatchLookup.find(function(bottleToBatch) {
+					return bottleToBatch[0] === bottleId;
+				});
+				if (fullBottle) {
+					actionError = 'bottle ' + bottleId + ' already contains: ' + fullBottle[1];
+				} else {
+					inventoryState.bottleToBatchLookup.push([bottleId, batchId]);
+				}
 				break;
 
 			case 'DRINKING':
@@ -85,23 +103,33 @@ app.put('/api/bottle', function(req, res) {
 				break;
 
 			default:
-				var actionError = 'unknown action: ' + action;
-				console.error(actionError);
-				res.status(500).send(actionError);
+				actionError = 'unknown action: ' + action;
 		}
 
-		// update data file using naive approach to preventing data corruption
-		let tmpFile = DATA_FILE + '-' + Date.now();
-		fs.writeFile(tmpFile, JSON.stringify(inventoryState, null, 4), function(err) {
-			if (err) {
-				console.error(err);
-				fs.unlinkSync(tmpFile);
-				res.status(500).send(err);
-			}
-			fs.unlinkSync(DATA_FILE);
-			fs.renameSync(tmpFile, DATA_FILE);
-			res.json(inventoryState);
-		});
+		if (actionError) {
+			console.error(actionError);
+			res.json({
+				error: true,
+				message: actionError
+			});
+		} else {
+			// update data file using naive approach to preventing data corruption
+			let tmpFile = DATA_FILE + '-' + Date.now();
+			fs.writeFile(tmpFile, JSON.stringify(inventoryState, null, 4), function(err) {
+				if (err) {
+					console.error(err);
+					fs.unlinkSync(tmpFile);
+					res.json({
+						error: true,
+						message: err
+					});
+				}
+				fs.unlinkSync(DATA_FILE);
+				fs.renameSync(tmpFile, DATA_FILE);
+
+				res.json(inventoryState);
+			});
+		}
 	});
 });
 

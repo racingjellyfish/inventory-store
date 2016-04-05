@@ -45,7 +45,7 @@ export function bottles(state = initialState.get('bottles'), action) {
 			if (action.error) {
 				console.error('problems updating bottle: ' + action.meta.id +
 					'\n\twith action: ' + action.meta.action +
-					'\n\tdue to: ' + action.payload);
+					'\n\tdue to: ' + action.payload.message);
 				return updateBottleStatus(state, action.meta.id, 'OK');
 			}
 			return readBottleData(state, action.payload.json);

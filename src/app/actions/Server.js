@@ -94,8 +94,14 @@ export function deleteItem(item) {
 			}).then((response) => {
 				return response.json();
 			}).then((json) => {
-				dispatch(itemDeleteSucceeded(item, json));
+				if (json.error) {
+					// handle action failed error
+					dispatch(itemDeleteFailed(item, new Error(json.message)));
+				} else {
+					dispatch(itemDeleteSucceeded(item, json));
+				}
 			}).catch((error) => {
+				// network error
 				dispatch(itemDeleteFailed(item, error));
 			});
 	};
@@ -148,8 +154,14 @@ export function updateItem(item) {
 			}).then((response) => {
 				return response.json();
 			}).then((json) => {
-				dispatch(itemUpdateSucceeded(item, json));
+				if (json.error) {
+					// handle action failed error
+					dispatch(itemUpdateFailed(item, new Error(json.message)));
+				} else {
+					dispatch(itemUpdateSucceeded(item, json));
+				}
 			}).catch((error) => {
+				// network error
 				dispatch(itemUpdateFailed(item, error));
 			});
 	};

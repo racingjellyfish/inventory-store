@@ -9,6 +9,11 @@ import { Map } from 'immutable';
 const initialState = new InventoryState();
 
 function batches(state = initialState.get('batches'), action) {
+	// currently no custom error handling so just return the current state
+	if (action.error) {
+		return state;
+	}
+
 	switch (action.type) {
 		case ActionTypes.ADD_BATCH:
 			return state.set(action.payload.batchId,
@@ -28,11 +33,8 @@ function batches(state = initialState.get('batches'), action) {
 };
 
 function bottleToBatchLookup(state = initialState.get('bottleToBatchLookup'), action) {
+	// currently no custom error handling so just return the current state
 	if (action.error) {
-		console.error('problems updating item: ' + action.meta.id +
-			'\n\tof type: ' + action.meta.type +
-			'\n\twith action: ' + action.meta.action +
-			'\n\tdue to: ' + action.payload);
 		return state;
 	}
 
@@ -49,6 +51,11 @@ function bottleToBatchLookup(state = initialState.get('bottleToBatchLookup'), ac
 };
 
 function serverState(state = initialState.get('serverState'), action) {
+	// currently no custom error handling so just return the current state
+	if (action.error) {
+		return state;
+	}
+
 	switch (action.type) {
 		case ActionTypes.REQUEST_DATA:
 			return state.set('isFetching', true);
