@@ -35,7 +35,7 @@ export function fetchData() {
 		dispatch(requestData());
 
 		// return a promise that will be resolved/rejected when the API call completes
-		return fetch('./data.json')
+		return fetch('/public/data.json')
 			.then((response) => {
 				return response.json();
 			})
