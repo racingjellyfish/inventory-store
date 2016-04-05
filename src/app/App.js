@@ -15,8 +15,10 @@ import InventoryContainer from './containers/Inventory';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, hashHistory } from 'react-router';
 import * as ServerActions from './actions/Server';
 import thunkMiddleware from 'redux-thunk';
+import VisibleBatchList from './containers/VisibleBatchList';
 
 const loggerMiddleware = createLogger();
 
@@ -26,7 +28,10 @@ let store = createStore(Inventory, applyMiddleware(
 
 ReactDOM.render(
 	<Provider store={store}>
-		<InventoryContainer />
+		<Router history={hashHistory}>
+			<Route path="/" component={InventoryContainer}/>
+			<Route path="/batches" component={VisibleBatchList}/>
+		</Router>
 	</Provider>,
 	document.getElementById('app')
 );
