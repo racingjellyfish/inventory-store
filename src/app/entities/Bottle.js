@@ -1,13 +1,11 @@
 import * as BottleProps from '../constants/BottleProps';
 import { Record } from 'immutable';
 
-export const DEFAULT_STATUS = 'OK';
-
 const defaultType = BottleProps.GLASS;
 const defaultVolume = 500;
 const defaultBottle = {
 	id: undefined,
-	status: DEFAULT_STATUS,
+	status: BottleProps.DEFAULT_STATUS,
 	type: defaultType,
 	volume: defaultVolume
 };
@@ -21,7 +19,7 @@ export class Bottle extends Record(defaultBottle) {
 
 		return new Bottle({
 			id: id,
-			status: status || DEFAULT_STATUS,
+			status: status || BottleProps.DEFAULT_STATUS,
 			type: type || defaultType,
 			volume: volume || defaultVolume
 		});

@@ -1,5 +1,6 @@
 import * as ActionTypes from '../constants/ActionTypes';
 import { Bottle } from '../entities/Bottle';
+import * as BottleProps from '../constants/BottleProps';
 import { InventoryState } from '../entities/InventoryState';
 
 const initialState = new InventoryState();
@@ -16,37 +17,37 @@ export function bottles(state = initialState.get('bottles'), action) {
 			return readBottleData(state, action.payload.json);
 
 		case ActionTypes.DELETE_ITEM_REQUEST:
-			if (action.meta.type !== 'bottle') {
+			if (action.meta.type !== BottleProps.TYPE) {
 				return state;
 			}
-			return updateBottleStatus(state, action.meta.id, 'DELETING');
+			return updateBottleStatus(state, action.meta.id, BottleProps.UPDATING);
 
 		case ActionTypes.DELETE_ITEM_RESPONSE:
-			if (action.meta.type !== 'bottle') {
+			if (action.meta.type !== BottleProps.TYPE) {
 				return state;
 			}
 			if (action.error) {
 				console.error('problems deleting bottle: ' + action.meta.id +
 					'\n\tdue to: ' + action.payload);
-				return updateBottleStatus(state, action.meta.id, 'OK');
+				return updateBottleStatus(state, action.meta.id, BottleProps.DEFAULT_STATUS);
 			}
 			return readBottleData(state, action.payload.json);
 
 		case ActionTypes.UPDATE_ITEM_REQUEST:
-			if (action.meta.type !== 'bottle') {
+			if (action.meta.type !== BottleProps.TYPE) {
 				return state;
 			}
-			return updateBottleStatus(state, action.meta.id, action.meta.action);
+			return updateBottleStatus(state, action.meta.id, BottleProps.UPDATING);
 
 		case ActionTypes.UPDATE_ITEM_RESPONSE:
-			if (action.meta.type !== 'bottle') {
+			if (action.meta.type !== BottleProps.TYPE) {
 				return state;
 			}
 			if (action.error) {
 				console.error('problems updating bottle: ' + action.meta.id +
 					'\n\twith action: ' + action.meta.action +
 					'\n\tdue to: ' + action.payload.message);
-				return updateBottleStatus(state, action.meta.id, 'OK');
+				return updateBottleStatus(state, action.meta.id, BottleProps.DEFAULT_STATUS);
 			}
 			return readBottleData(state, action.payload.json);
 

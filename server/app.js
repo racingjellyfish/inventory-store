@@ -84,7 +84,7 @@ app.put('/api/bottle', function(req, res) {
 
 		// update model
 		switch (action) {
-			case 'FILLING':
+			case 'FILL':
 				var fullBottle = inventoryState.bottleToBatchLookup.find(function(bottleToBatch) {
 					return bottleToBatch[0] === bottleId;
 				});
@@ -95,7 +95,7 @@ app.put('/api/bottle', function(req, res) {
 				}
 				break;
 
-			case 'DRINKING':
+			case 'DRINK':
 				inventoryState.bottleToBatchLookup =
 					inventoryState.bottleToBatchLookup.filter(function(bottleToBatch) {
 					return bottleToBatch[0] != bottleId;

@@ -1,14 +1,16 @@
-/**
+/*
  * bottle related actions
  */
 export const ADD_BOTTLE = 'ADD_BOTTLE';
+export const DRINK = 'DRINK';
+export const FILL = 'FILL';
 
-/**
+/*
  * batch related actions
  */
 export const ADD_BATCH = 'ADD_BATCH';
 
-/**
+/*
  * server related actions
  */
 export const DATA_REQUEST_FAILURE = 'DATA_REQUEST_FAILURE';
