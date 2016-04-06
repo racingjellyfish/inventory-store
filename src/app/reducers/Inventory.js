@@ -45,6 +45,9 @@ function bottleToBatchLookup(state = initialState.get('bottleToBatchLookup'), ac
 		case ActionTypes.UPDATE_ITEM_RESPONSE:
 			return new Map(action.payload.json.bottleToBatchLookup);
 
+		case ActionTypes.DELETE_ITEM_RESPONSE:
+			return new Map(action.payload.json.bottleToBatchLookup);
+
 		default:
 			return state;
 	}
