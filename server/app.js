@@ -41,11 +41,11 @@ app.delete('/api/bottle', function(req, res) {
 		var id = req.body.id;
 		var inventoryState = JSON.parse(data);
 		inventoryState.bottles = inventoryState.bottles.filter(function(bottle) {
-			return bottle.id != id;
+			return bottle.id !== id;
 		});
 		inventoryState.bottleToBatchLookup =
 			inventoryState.bottleToBatchLookup.filter(function(bottleToBatch) {
-			return bottleToBatch[0] != id;
+			return bottleToBatch[0] !== id;
 		});
 
 		// update data file using naive approach to preventing data corruption
