@@ -6,7 +6,7 @@
 import './ux/Inventory.less';
 
 import FilteredBottleListContainer from '../containers/FilteredBottleList';
-import { Link } from 'react-router';
+import NavLink from '../containers/NavLink';
 import React from 'react';
 
 export default class InventoryRoot extends React.Component {
@@ -23,9 +23,11 @@ export default class InventoryRoot extends React.Component {
 				<div className='inventory'>
 					<h1>Inventory</h1>
 					<ul className="nav">
-						<li><Link to="/batches">Batches</Link></li>
+						<li><NavLink to="/" onlyActiveOnIndex={true}>Home</NavLink></li>
+						<li><NavLink to="/batches">Batches</NavLink></li>
+						<li><NavLink to="/bottles">Bottles</NavLink></li>
 					</ul>
-					<FilteredBottleListContainer />
+					{this.props.children}
 				</div>
 			);
 		}

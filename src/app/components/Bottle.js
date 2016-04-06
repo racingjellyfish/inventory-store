@@ -1,10 +1,11 @@
 /**
- * a simple bottle component
+ * a simple bottle overview component
  */
 'use strict';
 
 import './ux/Bottle.less';
 
+import { Link } from 'react-router';
 import { PropTypes } from 'react';
 import React from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
@@ -24,6 +25,7 @@ export default class Bottle extends React.Component {
 
 		return (
 			<li className='bottle'>
+				<span><Link to={'/bottles/' + id}>{id}</Link></span>
 				<span className='contents'>
 					contents: {contents}
 				</span>

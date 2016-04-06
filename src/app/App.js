@@ -9,14 +9,17 @@ import 'babel-polyfill';
 import './ux/App.less';
 
 import { applyMiddleware, createStore } from 'redux';
+import BottleDetailContainer from './containers/BottleDetail';
 import createLogger from 'redux-logger';
 import FilteredBatchListContainer from './containers/FilteredBatchList';
+import FilteredBottleListContainer from './containers/FilteredBottleList';
+import Home from './components/Home';
 import Inventory from './reducers/Inventory';
 import InventoryContainer from './containers/Inventory';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory, Route, Router } from 'react-router';
+import { browserHistory, IndexRoute, Route, Router } from 'react-router';
 import * as ServerActions from './actions/Server';
 import thunkMiddleware from 'redux-thunk';
 
@@ -29,8 +32,14 @@ let store = createStore(Inventory, applyMiddleware(
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={browserHistory}>
-			<Route path="/" component={InventoryContainer} />
-			<Route path="/batches" component={FilteredBatchListContainer} />
+			<Route path="/" component={InventoryContainer}>
+				<IndexRoute component={Home} />
+
+				<Route path="/batches" component={FilteredBatchListContainer} />
+				<Route path="/bottles" component={FilteredBottleListContainer}>
+					<Route path="/bottles/:bottleId" component={BottleDetailContainer} />
+				</Route>
+			</Route>
 		</Router>
 	</Provider>,
 	document.getElementById('app')

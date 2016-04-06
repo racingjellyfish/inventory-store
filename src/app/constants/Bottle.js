@@ -14,4 +14,5 @@ export const PET = 'PET';
  */
 export const OK = 'OK';
 export const UPDATING = 'UPDATING';
+
 export const DEFAULT_STATUS = OK;

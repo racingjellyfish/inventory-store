@@ -23,6 +23,7 @@ export default class BottleList extends React.Component {
 							onClick={this.props.onBottleClick} />
 					)}
 				</ul>
+				{this.props.children}
 			</div>
 		);
 	};
