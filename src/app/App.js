@@ -16,7 +16,7 @@ import InventoryContainer from './containers/Inventory';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory } from 'react-router';
+import { browserHistory, Route, Router } from 'react-router';
 import * as ServerActions from './actions/Server';
 import thunkMiddleware from 'redux-thunk';
 
@@ -28,7 +28,7 @@ let store = createStore(Inventory, applyMiddleware(
 
 ReactDOM.render(
 	<Provider store={store}>
-		<Router history={hashHistory}>
+		<Router history={browserHistory}>
 			<Route path="/" component={InventoryContainer} />
 			<Route path="/batches" component={FilteredBatchListContainer} />
 		</Router>
