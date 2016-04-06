@@ -7,11 +7,14 @@ import './ux/Batch.less';
 
 import { PropTypes } from 'react';
 import React from 'react';
+import { Record } from 'immutable';
 import shallowCompare from 'react-addons-shallow-compare';
 
 export default class Batch extends React.Component {
 	render() {
-		const { id, name, count } = this.props;
+		const { batch, count } = this.props;
+		const id = batch.get('id');
+		const name = batch.get('name');
 
 		return (
 			<li className='batch'>
@@ -28,7 +31,6 @@ export default class Batch extends React.Component {
 }
 
 Batch.propTypes = {
-	id: PropTypes.number.isRequired,
-	name: PropTypes.string.isRequired,
+	batch: React.PropTypes.instanceOf(Record),
 	count: PropTypes.number.isRequired
 };

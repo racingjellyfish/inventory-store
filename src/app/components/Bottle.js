@@ -8,11 +8,14 @@ import './ux/Bottle.less';
 import { Link } from 'react-router';
 import { PropTypes } from 'react';
 import React from 'react';
+import { Record } from 'immutable';
 import shallowCompare from 'react-addons-shallow-compare';
 
 export default class Bottle extends React.Component {
 	render() {
-		const { id, contents, status, onDelete, onDrink } = this.props;
+		const { bottle, contents, onDelete, onDrink } = this.props;
+		const id = bottle.get('id');
+		const status = bottle.get('status');
 
 		// TODO: some sort of generic button component?
 		const drinkButton = contents === 'empty' ?
@@ -42,9 +45,8 @@ export default class Bottle extends React.Component {
 }
 
 Bottle.propTypes = {
-	id: PropTypes.number.isRequired,
+	bottle: React.PropTypes.instanceOf(Record),
 	contents: PropTypes.string.isRequired,
-	status: PropTypes.string.isRequired,
 
 	onDelete: PropTypes.func.isRequired,
 	onDrink: PropTypes.func.isRequired

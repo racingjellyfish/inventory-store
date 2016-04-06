@@ -3,28 +3,30 @@
  */
 'use strict';
 
-import './ux/Bottle.less';
+import './ux/BottleDetail.less';
 
 import { PropTypes } from 'react';
 import React from 'react';
+import { Record } from 'immutable';
 import shallowCompare from 'react-addons-shallow-compare';
 
 export default class BottleDetail extends React.Component {
 	render() {
-		if (this.props.isFetching) {
+		const { isFetching, bottle, contents, onDelete, onDrink } = this.props;
+
+		if (isFetching) {
 			return (
 				<div className='bottle'>
 					<div>loading...</div>
 				</div>
 			);
-		} else if (this.props.status === 'UNKNOWN') {
-			return (
-				<div className='bottle'>
-					<div>Unknown bottle id: {this.props.id}</div>
-				</div>
-			);
-		} else {
-			const { id, contents, type, volume, onDelete, onDrink } = this.props;
+		}
+
+		if (bottle) {
+			const id = bottle.get('id');
+			const status = bottle.get('status');
+			const type = bottle.get('type');
+			const volume = bottle.get('volume');
 
 			// TODO: some sort of generic button component?
 			const drinkButton = contents === 'empty' ?
@@ -52,6 +54,12 @@ export default class BottleDetail extends React.Component {
 				</div>
 			);
 		}
+
+		return (
+			<div className='bottle'>
+				<div>Unknown bottle id: {this.props.id}</div>
+			</div>
+		);
 	};
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -61,7 +69,9 @@ export default class BottleDetail extends React.Component {
 
 BottleDetail.propTypes = {
 	id: PropTypes.number.isRequired,
-	status: PropTypes.string.isRequired,
+	isFetching: PropTypes.bool.isRequired,
+	bottle: React.PropTypes.instanceOf(Record),
+	contents: PropTypes.string.isRequired,
 
 	onDelete: PropTypes.func.isRequired,
 	onDrink: PropTypes.func.isRequired

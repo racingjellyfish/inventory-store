@@ -13,8 +13,7 @@ const getBottleCount = (state, batch) => {
 const mapStateToProps = (state, ownProps) => {
 	const batch = ownProps.batch;
 	return {
-		id: batch.get('id'),
-		name: batch.get('name'),
+		batch: batch,
 		count: getBottleCount(state, batch)
 	};
 };
