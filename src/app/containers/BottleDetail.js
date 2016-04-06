@@ -8,7 +8,7 @@ const getContents = (state, bottle) => {
 		const bottleId = bottle.get('id');
 		const batchId = state.get('bottleToBatchLookup').get(bottleId);
 		const batch = state.get('batches').get(batchId);
-		contents = batch === undefined ? 'empty' : batch.get('name')
+		contents = batch === undefined ? 'empty' : batch.get('name');
 	}
 	return contents;
 };
