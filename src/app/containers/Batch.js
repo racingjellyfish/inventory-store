@@ -29,9 +29,9 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-const LabelledBatch = connect(
+const Batch = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(BatchComponent);
 
-export default LabelledBatch;
+export default Batch;
