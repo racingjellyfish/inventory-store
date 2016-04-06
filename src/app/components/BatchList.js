@@ -8,6 +8,7 @@ import './ux/BatchList.less';
 import BatchContainer from '../containers/Batch';
 import { PropTypes } from 'react';
 import React from 'react';
+import { Record } from 'immutable';
 
 export default class BatchList extends React.Component {
 	render() {
@@ -29,6 +30,6 @@ export default class BatchList extends React.Component {
 }
 
 BatchList.propTypes = {
-	batches: PropTypes.object.isRequired,
+	batches: React.PropTypes.arrayOf(React.PropTypes.instanceOf(Record)),
 	onBatchClick: PropTypes.func.isRequired
 };

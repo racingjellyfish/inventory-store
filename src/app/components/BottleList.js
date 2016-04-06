@@ -8,6 +8,7 @@ import './ux/BottleList.less';
 import BottleContainer from '../containers/Bottle';
 import { PropTypes } from 'react';
 import React from 'react';
+import { Record } from 'immutable';
 
 export default class BottleList extends React.Component {
 	render() {
@@ -30,6 +31,6 @@ export default class BottleList extends React.Component {
 }
 
 BottleList.propTypes = {
-	bottles: PropTypes.object.isRequired,
+	bottles: React.PropTypes.arrayOf(React.PropTypes.instanceOf(Record)),
 	onBottleClick: PropTypes.func.isRequired
 };
