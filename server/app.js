@@ -9,6 +9,7 @@ let fs = require('fs');
 let path = require('path');
 
 let DATA_FILE = path.join(__dirname, '../public/data.json');
+let DATA_INDENT = 2;
 
 let app = express();
 
@@ -49,7 +50,7 @@ app.delete('/api/bottle', function(req, res) {
 
 		// update data file using naive approach to preventing data corruption
 		let tmpFile = DATA_FILE + '-' + Date.now();
-		fs.writeFile(tmpFile, JSON.stringify(inventoryState, null, 4), function(err) {
+		fs.writeFile(tmpFile, JSON.stringify(inventoryState, null, DATA_INDENT), function(err) {
 			if (err) {
 				fs.unlinkSync(tmpFile);
 				console.error(err);
@@ -115,7 +116,7 @@ app.put('/api/bottle', function(req, res) {
 		} else {
 			// update data file using naive approach to preventing data corruption
 			let tmpFile = DATA_FILE + '-' + Date.now();
-			fs.writeFile(tmpFile, JSON.stringify(inventoryState, null, 4), function(err) {
+			fs.writeFile(tmpFile, JSON.stringify(inventoryState, null, DATA_INDENT), function(err) {
 				if (err) {
 					console.error(err);
 					fs.unlinkSync(tmpFile);
